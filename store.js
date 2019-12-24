@@ -17,13 +17,13 @@ function ready() {
         input.addEventListener('change', quantityChanged);
     };
 
-    var addToCartButtons = document.getElementsByClassName('good__actions__button');
+    var addToCartButtons = document.getElementsByClassName('good__button');
     for (var i = 0; i < addToCartButtons.length; i++) {
         var button = addToCartButtons[i];
         button.addEventListener('click', addToCartClicked);
     };
 
-    var quantityToAdd = document.getElementsByClassName('good__actions__amount');
+    var quantityToAdd = document.getElementsByClassName('good__amount');
     for (var i = 0; i < addToCartButtons.length; i++) {
         var amount = quantityToAdd[i];
         amount.addEventListener('change', quantityChanged);
@@ -74,9 +74,9 @@ function quantityToAddChange(event) {
 function addToCartClicked(event) {
     var button = event.target;
     var shopItem = button.parentElement.parentElement;
-    var title = shopItem.getElementsByClassName('good__description__title')[0].innerText;
-    var priceRaw = shopItem.getElementsByClassName('good__actions__price')[0].innerText;
-    var amount = shopItem.getElementsByClassName('good__actions__amount')[0].value;
+    var title = shopItem.getElementsByClassName('good__description-title')[0].innerText;
+    var priceRaw = shopItem.getElementsByClassName('good__price')[0].innerText;
+    var amount = shopItem.getElementsByClassName('good__amount')[0].value;
     var imageSrc = shopItem.getElementsByClassName('good__image')[0].src;
     var code = shopItem.getElementsByClassName('good__code')[0].innerText;
     var price = parseFloat(priceRaw.replace('rub', ''));

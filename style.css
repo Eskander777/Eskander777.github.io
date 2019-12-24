@@ -41,11 +41,11 @@ body {
     width: 150px;
 }
 
-.good__actions__price {
+.good__price {
     padding-right: 30px;
 }
 
-.good__actions__amount{
+.good__amount{
     padding: 3px;
     width: 115px;
     border-radius: 5px;
@@ -57,7 +57,7 @@ body {
     margin-right: 25px;
 }
 
-.good__actions__button {
+.good__button {
     background-color: rgba(80, 150, 255);
     color: white;
     border: none;
@@ -71,7 +71,7 @@ body {
     cursor: pointer;
 }
 
-.good__actions__button:hover {
+.good__button:hover {
     background-color: rgba(80, 80, 255);
 }
 
