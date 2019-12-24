@@ -119,7 +119,7 @@ function addItemToCart(title, price, amount, imageSrc, code, total){
     alert("Товар успешно добавлен");
     cartRow.getElementsByClassName('cart__item-delete-button')[0].addEventListener('click', removeCartItem);
     cartRow.getElementsByClassName('cart__quantity-input')[0].addEventListener('change', quantityChanged);
-}
+};
 
 function updateCartTotal() {
     var cartItemContainer = document.getElementsByClassName('cart__items')[0];
@@ -137,7 +137,7 @@ function updateCartTotal() {
         document.getElementsByClassName('cart__item-total-price')[i].innerText = totalForItem + " ₽";
         total = total + (price * quantity);
         totalAmount  = totalAmount + quantity;
-    }
+    };
     total = Math.round(total * 100) / 100;
     document.getElementsByClassName('cart__total-amount')[0].innerText = totalAmount;
     document.getElementsByClassName('cart__total-price')[0].innerText = total + ' ₽';
