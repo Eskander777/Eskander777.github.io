@@ -1,4 +1,4 @@
-if (document.readyState == 'loading') {
+ (function() { if (document.readyState == 'loading') {
     document.addEventListener('DOMContentLoaded', ready);
 } else {
     ready();
@@ -142,3 +142,4 @@ function updateCartTotal() {
     document.getElementsByClassName('cart__total-amount')[0].innerText = totalAmount;
     document.getElementsByClassName('cart__total-price')[0].innerText = total + ' ₽';
 };
+})();
