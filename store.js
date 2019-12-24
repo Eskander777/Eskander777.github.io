@@ -5,13 +5,13 @@ if (document.readyState == 'loading') {
 };
 
 function ready() {
-    var removeCartItemButtons = document.getElementsByClassName("cart__item__delete-button");
+    var removeCartItemButtons = document.getElementsByClassName("cart__item-delete-button");
     for (var i = 0; i < removeCartItemButtons.length; i++) {
         var button = removeCartItemButtons[i];
         button.addEventListener('click', removeCartItem);
     };
 
-    var quantityInputs = document.getElementsByClassName('cart__quantity__input');
+    var quantityInputs = document.getElementsByClassName('cart__quantity-input');
     for (var i = 0; i < removeCartItemButtons.length; i++) {
         var input = quantityInputs[i];
         input.addEventListener('change', quantityChanged);
@@ -89,36 +89,36 @@ function addItemToCart(title, price, amount, imageSrc, code, total){
     var cartRow = document.createElement('div');
     cartRow.classList.add('cart__row');
     var cartItems = document.getElementsByClassName('cart__items')[0];
-    var cartItemNames = cartItems.getElementsByClassName('cart__item__name');
-    var addedAmounts = cartItems.getElementsByClassName('cart__quantity__input');
+    var cartItemNames = cartItems.getElementsByClassName('cart__item-name');
+    var addedAmounts = cartItems.getElementsByClassName('cart__quantity-input');
     for (var i = 0; i < cartItemNames.length; i++){
         if(cartItemNames[i].innerText == title){
             var addedAmount = parseInt(addedAmounts[i].value);
             addedAmount += parseInt(amount);
-            document.getElementsByClassName('cart__quantity__input')[i].value = addedAmount;
+            document.getElementsByClassName('cart__quantity-input')[i].value = addedAmount;
             return;
         };
     };
     var cartRowContents = `
         <div class="cart__item cart__column">
-            <img class="cart__item__image" src="${imageSrc}">
+            <img class="cart__item-image" src="${imageSrc}">
             <div>
-                <span class="cart__item__name">${title}</span>
-                <div class="cart__item__code">${code}</div>
+                <span class="cart__item-name">${title}</span>
+                <div class="cart__item-code">${code}</div>
             </div>
         </div>
         <span class="cart__price cart__column">${price} ₽</span>
         <div class="cart__quantity cart__column">
-            <input class="cart__quantity__input" id="cart-amount" type="number" value="${amount}">
-            <button class="cart__item__delete-button" type="button">Убрать</button>
+            <input class="cart__quantity-input" id="cart-amount" type="number" value="${amount}">
+            <button class="cart__item-delete-button" type="button">Убрать</button>
         </div>
-        <div class="cart__item__total cart__column cart__item__total__price">${total} ₽</div>
+        <div class="cart__item-total cart__column cart__item-total-price">${total} ₽</div>
         `;
     cartRow.innerHTML = cartRowContents;
     cartItems.append(cartRow);
     alert("Товар успешно добавлен");
-    cartRow.getElementsByClassName('cart__item__delete-button')[0].addEventListener('click', removeCartItem);
-    cartRow.getElementsByClassName('cart__quantity__input')[0].addEventListener('change', quantityChanged);
+    cartRow.getElementsByClassName('cart__item-delete-button')[0].addEventListener('click', removeCartItem);
+    cartRow.getElementsByClassName('cart__quantity-input')[0].addEventListener('change', quantityChanged);
 }
 
 function updateCartTotal() {
@@ -129,16 +129,16 @@ function updateCartTotal() {
     for (var i = 0; i < cartRows.length; i++) {
         var cartRow = cartRows[i];
         var priceElement = cartRow.getElementsByClassName('cart__price')[0];
-        var quantityElement = cartRow.getElementsByClassName('cart__quantity__input')[0];
+        var quantityElement = cartRow.getElementsByClassName('cart__quantity-input')[0];
         var price = parseFloat(priceElement.innerText.replace('rub', ''));
         var quantity = parseInt(quantityElement.value);
         var totalForItem = 0;
         totalForItem = totalForItem + (price * quantity);
-        document.getElementsByClassName('cart__item__total__price')[i].innerText = totalForItem + " ₽";
+        document.getElementsByClassName('cart__item-total-price')[i].innerText = totalForItem + " ₽";
         total = total + (price * quantity);
         totalAmount  = totalAmount + quantity;
     }
     total = Math.round(total * 100) / 100;
-    document.getElementsByClassName('cart__total__amount')[0].innerText = totalAmount;
-    document.getElementsByClassName('cart__total__price')[0].innerText = total + ' ₽';
+    document.getElementsByClassName('cart__total-amount')[0].innerText = totalAmount;
+    document.getElementsByClassName('cart__total-price')[0].innerText = total + ' ₽';
 };

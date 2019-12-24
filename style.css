@@ -108,25 +108,25 @@ body {
     width: 15%;
 }
 
-.cart__item__image {
+.cart__item-image {
     height: 100px;
     width: auto;
     margin-bottom: 11px;
     border-radius: 5px;
 }
 
-.cart__item__name {
+.cart__item-name {
     margin: 3px 15px;
     color: black;
     font-size: 1.2em;
 }
 
-.cart__item__code {
+.cart__item-code {
     margin: 3px 15px;
     color: grey;
 }
 
-.cart__item__delete-button {
+.cart__item-delete-button {
     color: white;
     background-color: #EB5757;
     height: 34px;
@@ -136,11 +136,11 @@ body {
     cursor: pointer;
 }
 
-.cart__item__delete-button:hover {
+.cart__item-delete-button:hover {
     background-color: #CC4C4C;
 }
 
-.cart__quantity__input {
+.cart__quantity-input {
     height: 28px;
     width: 50px;
     border-radius: 5px;
@@ -152,11 +152,11 @@ body {
     margin-right: 25px;
 }
 
-.cart__item__total {
+.cart__item-total {
     width: 14%;
 }
 
-.cart__item__total__price {
+.cart__item-total-price {
     color: #333;
     font-size: 1.1em;
     margin-top: 10px;
@@ -175,28 +175,28 @@ body {
     text-align: end;
 }
 
-.cart__total__amount__title{
+.cart__total-amount-title{
     font-weight: bold;
     font-size: 1.5em;
     color: black;
     margin-right: 20px;
 }
 
-.cart__total__amount {
+.cart__total-amount {
     color: #333;
     font-size: 1.1em;
     margin-top: 10px;
     margin-right: 20px;
 }
 
-.cart__total__title {
+.cart__total-title {
     font-weight: bold;
     font-size: 1.5em;
     color: black;
     margin-right: 20px;
 }
 
-.cart__total__price {
+.cart__total-price {
     color: #333;
     font-size: 1.1em;
     margin-top: 10px;
