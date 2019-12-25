@@ -103,7 +103,7 @@ function addItemToCart(title, price, amount, imageSrc, code, total){
         <div class="cart__item cart__column">
             <img class="cart__item-image" src="${imageSrc}">
             <div>
-                <span class="cart__item-name">${title}</span>
+                <div class="cart__item-name">${title}</div>
                 <div class="cart__item-code">${code}</div>
             </div>
         </div>
