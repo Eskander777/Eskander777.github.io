@@ -29,25 +29,8 @@ function ready() {
         amount.addEventListener('change', quantityChanged);
     };
 
-    var modal = document.getElementById("myModal");
-
-    var btn = document.getElementById("myBtn");
-
-    var span = document.getElementsByClassName("close")[0];
-
-    btn.onclick = function() {
-    modal.style.display = "block";
-    };
-
-    span.onclick = function() {
-    modal.style.display = "none";
-    };
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-        modal.style.display = "none";
-        };
-    };
+    var showCartBtn = document.getElementById("myBtn");
+    showCartBtn.addEventListener('click', showCartFunc);
 
     var imgs = document.getElementsByClassName("good__image");
     for (var i = 0; i < imgs.length; i++) {
@@ -56,12 +39,22 @@ function ready() {
     };
 };
 
+function showCartFunc() {
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+    modal.style.display = "block";
+
+    span.onclick = function() {
+        modal.style.display = "none";
+        };
+};
+
 function openGoodImage(event) {
     var imageModal = document.getElementById("myImageModal");
     var modalImg = document.getElementById("img01");
     var captionText = document.getElementById("caption");
-    var img = event.target;
     var spanImage = document.getElementsByClassName("closeImageModal")[0];
+    var img = event.target;
     imageModal.style.display = "block";
     modalImg.src = img.src;
     captionText.innerHTML = img.alt;
