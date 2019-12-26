@@ -48,6 +48,27 @@ function ready() {
         modal.style.display = "none";
         };
     };
+
+    var imgs = document.getElementsByClassName("good__image");
+    for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        img.addEventListener('click', openGoodImage);
+    };
+};
+
+function openGoodImage(event) {
+    var imageModal = document.getElementById("myImageModal");
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    var img = event.target;
+    var spanImage = document.getElementsByClassName("closeImageModal")[0];
+    imageModal.style.display = "block";
+    modalImg.src = img.src;
+    captionText.innerHTML = img.alt;
+
+    spanImage.onclick = function() {
+        imageModal.style.display = "none";
+      };
 };
 
 function removeCartItem(event) {
