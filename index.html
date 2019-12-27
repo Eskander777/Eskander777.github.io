@@ -5,6 +5,7 @@
     <title>Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A task for JS developer job">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" />
     <script src="store.js" async></script>
 </head>
@@ -15,77 +16,92 @@
         <div id="caption"></div>
     </div>
 <section>
-    <h1 class="goods-name">Книги</h1>
-    <div class="goods">
-    <div class="good">
+    <h1 class="goods-name text-center">Книги</h1>
+    <div class="goods row">
+    <div class="good col">
         <img class="good__image" src=https://b1.culture.ru/c/365442.jpg alt="Война и мир">
+        <div class="good__price">
+            <span class="good__price-val">212</span>
+            <span class="good__price-currency">₽</span>
+        </div>
         <div class="good__description">
             <h3 class="good__description-title">Война и мир</h3>
             <p>«Война и мир» — роман-эпопея Льва Николаевича Толстого. Историко-философская мысль автора большей частью проникает в роман не в виде рассуждений, а в гениально схваченных подробностях и цельных картинах, истинный смысл которых нетрудно понять всякому вдумчивому читателю.</p>
             <div class="good__code">Артикул: 1</div>
         </div>
         <div class="good__actions">
-            <span class="good__price">212 ₽</span>
-            <input class="good__amount" type="number" value="1">
-            <button class="good__button" type="button">Добавить в корзинуt</button>
+            <input class="good__amount col-4" type="number" value="1">
+            <button class="good__button btn btn-primary" type="button">Добавить в корзинуt</button>
         </div>
     </div>
-    <div class="good">
+    <div class="good col">
         <img class="good__image" src=https://img4.labirint.ru/rc/353e7964053487ba97fe00ca0fc4644c/220x340/books50/493796/cover.jpg?1437492343 alt="Над пропастью во ржи">
+        <div class="good__price">
+            <span class="good__price-val">187</span>
+            <span class="good__price-currency">₽</span>
+        </div>
         <div class="good__description">
             <h3 class="good__description-title">Над пропастью во ржи</h3>
             <p>Единственный роман Сэлинджера - "Над пропастью во ржи" - стал переломной вехой в истории мировой литературы.Название книги и имя главного героя Холдена Колфилда сделались кодовыми для многих поколений молодых бунтарей от битников и хиппи до представителей современных радикальных молодежных движений.</p>
             <div class="good__code">Артикул: 2</div>
         </div>
         <div class="good__actions">
-            <span class="good__price">187 ₽</span>
-            <input class="good__amount" type="number" value="1">
-            <button class="good__button" type="button">Добавить в корзину</button>
+            <input class="good__amount col-4" type="number" value="1">
+            <button class="good__button btn btn-primary" type="button">Добавить в корзину</button>
         </div>
     </div>
-    <div class="good">
+    <div class="good col">
         <img class="good__image" src=https://cdn1.ozone.ru/s3/multimedia-5/c650/6006264545.jpg alt="Идиот">
+        <div class="good__price">
+            <span class="good__price-val">144</span>
+            <span class="good__price-currency">₽</span>      
+        </div>
         <div class="good__description">
             <h3 class="good__description-title">Идиот</h3>
-            <p>Завораживающая история трагических страстей, связавших купца Парфена Рогожина, бывшую содержанку богатого дворянина Настасью Филипповну и "идеального человека" князя Мышкина — беспомощного идиота в мире корысти и зла, гласящая о том, что сострадание, возможно, единственный закон человеческого бытия. Она по-прежнему актуальна и воспринимается ярко и непосредственно, будто была написана вчера.</p>
+            <p>Завораживающая история трагических страстей, связавших купца Парфена Рогожина, бывшую содержанку богатого дворянина Настасью Филипповну и "идеального человека" князя Мышкина — беспомощного идиота в мире корысти и зла, гласящая о том, что сострадание, возможно, единственный закон человеческого бытия.</p>
             <div class="good__code">Артикул: 3</div>
         </div>
         <div class="good__actions">
-            <span class="good__price">144 ₽</span>
-            <input class="good__amount" type="number" value="1">
-            <button class="good__button" type="button">Добавить в корзину</button>
+            <input class="good__amount col-4" type="number" value="1">
+            <button class="good__button btn btn-primary" type="button">Добавить в корзину</button>
         </div>
     </div>
-    <div class="good">
+    <div class="good col">
         <img class="good__image" src=https://www.moscowbooks.ru/image/book/495/w600/i495426.jpg alt="Преступление и наказание">
+        <div class="good__price">
+            <span class="good__price-val">160</span>
+            <span class="good__price-currency">₽</span>   
+        </div>
         <div class="good__description">
             <h3 class="good__description-title">Преступление и наказание</h3>
             <p>Это и глубокий философский роман, и тонкая психологическая драма, и захватывающий детектив, и величественная картина мрачного города, в недрах которого герои грешат и ищут прощения, жертвуют собой и отрекаются от себя ради ближних и находят успокоение в смирении, покаянии, вере.</p>
             <div class="good__code">Артикул: 4</div>
         </div>
         <div class="good__actions">
-            <span class="good__price">160 ₽</span>
-            <input class="good__amount" type="number" value="1">
-            <button class="good__button" type="button">Добавить в корзину</button>
+            <input class="good__amount col-4" type="number" value="1">
+            <button class="good__button btn btn-primary" type="button">Добавить в корзину</button>
         </div>
     </div>
-    <div class="good">
+    <div class="good col">
         <img class="good__image" src=https://cdn1.ozone.ru/multimedia/c650/1003559322.jpg alt="На дне">
+        <div class="good__price">
+            <span class="good__price-val">96</span>
+            <span class="good__price-currency">₽</span>   
+        </div>
         <div class="good__description">
             <h3 class="good__description-title">На дне</h3>
             <p>Пьеса "На дне", несомненно, одна из вершин горьковского творчества. Основная тема пьесы "На дне" - правда и ложь. В пьесе противопоставлены старец Лука со своими тихими и вечными истинами и громогласный резонер Сатин, который, согласно марксистской критике, олицетворяет собой пробуждение пролетарского сознания.</p>
             <div class="good__code">Артикул: 5</div>
         </div>
         <div class="good__actions">
-            <span class="good__price">96 ₽</span>
-            <input class="good__amount" type="number" value="1">
-            <button class="good__button" type="button">Добавить в корзину</button>
+            <input class="good__amount col-4" type="number" value="1">
+            <button class="good__button btn btn-primary" type="button">Добавить в корзину</button>
         </div>
     </div>
     </div>
 </section>
 
-<button class="show-cart-button" id="myBtn">Показать корзину</button>
+<button class="show-cart-button btn btn-secondary btn-lg" id="myBtn">Показать корзину</button>
 <div id="myModal" class="modal">
 
   <div class="modal__content">

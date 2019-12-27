@@ -124,7 +124,7 @@ function addItemToCart(title, price, amount, imageSrc, code, total){
         <span class="cart__price cart__column">${price} ₽</span>
         <div class="cart__quantity cart__column">
             <input class="cart__quantity-input" id="cart-amount" type="number" value="${amount}">
-            <button class="cart__item-delete-button" type="button">Убрать</button>
+            <button class="cart__item-delete-button btn btn-danger" type="button">Убрать</button>
         </div>
         <div class="cart__item-total cart__column cart__item-total-price">${total} ₽</div>
         `;

@@ -7,31 +7,23 @@ body {
 }
 
 .goods {
-    display: flex;
     justify-content: left;
-    flex-wrap: wrap;
 }
 
 .good {
     border: 1px solid black;
-    padding: 10px 40px 40px;
-    max-width: 720px;
-    display: flex;
-}
-
-@media only screen and (max-width: 600px) {
-    .good {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+    padding: 15px 40px 40px;
+    min-width: 350px;
+    max-width: 350px;
 }
 
 .good__image {
+    position: static;
     margin: 20px 30px 0 0;
     width: 200px;
+    height: 300px;
     object-fit: contain;
     align-self: flex-start;
-    border-radius: 5px;
 }
 
 .good__image:hover {opacity: 0.7}
@@ -51,7 +43,14 @@ body {
 }
 
 .good__price {
-    padding-right: 30px;
+    font: 17px PTSansB,Tahoma,sans-serif;
+    position: static;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.good__price-val {
+    font-weight: bold;
 }
 
 .good__amount{
@@ -67,21 +66,10 @@ body {
 }
 
 .good__button {
-    background-color: rgba(80, 150, 255);
-    color: white;
-    border: none;
-    border-radius: .3em;
-    text-align: center;
-    padding: 1px 8px;
-    margin-top: 3px;
-    margin-right: .5em;
+    margin-top: 10px;
     font-weight: bold;
     font-size: 14px;
-    cursor: pointer;
-}
-
-.good__button:hover {
-    background-color: rgba(80, 80, 255);
+    position: static;
 }
 
 .cart__header {
@@ -149,11 +137,6 @@ body {
 }
 
 .cart__item-delete-button {
-    color: white;
-    background-color: #EB5757;
-    height: 34px;
-    border: none;
-    border-radius: .3em;
     font-weight: bold;
     cursor: pointer;
 }
@@ -228,14 +211,6 @@ body {
     display: block;
     margin: 40px auto 80px;
     font-size: 1.75em;
-    color: white;
-    background-color: rgba(30, 180, 30);
-    border: none;
-    border-radius: 10px;
-}
-
-.show-cart-button:hover {
-    background-color: green;
 }
 
 .modal {
