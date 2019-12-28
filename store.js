@@ -205,6 +205,45 @@ function addToCartClicked(event) {
 function addItemToCart(title, price, amount, imageSrc, code, total){
     var cartRow = document.createElement('div');
     cartRow.classList.add('cart__row');
+
+    var cartItemDiv = document.createElement('div');
+    cartItemDiv.className = "cart__item cart__column";
+    var cartItemImg = document.createElement('img')
+    cartItemImg.className = "cart__item-image"
+    cartItemImg.setAttribute("src", imageSrc)
+    var cartItemNameCodeDiv = document.createElement('div');
+    var cartItemNameDiv = document.createElement('div');
+    cartItemNameDiv.className = "cart__item-name";
+    cartItemNameDiv.textContent = title;
+    var cartItemCodeDiv = document.createElement('div');
+    cartItemCodeDiv.className = "cart__item-code"
+    cartItemCodeDiv.textContent = code;
+    cartItemNameCodeDiv.append(cartItemNameDiv, cartItemCodeDiv);
+    cartItemDiv.append(cartItemImg, cartItemNameCodeDiv)
+
+    var cartItemNameitemPriceSpan = document.createElement('span');
+    cartItemNameitemPriceSpan.className = "cart__price cart__column";
+    cartItemNameitemPriceSpan.textContent = price + " ₽";
+
+    var cartItemQtyDelBtnDiv = document.createElement('div');
+    cartItemQtyDelBtnDiv.className = "cart__quantity cart__column";
+    var cartItemQtyInpInput = document.createElement('input');
+    cartItemQtyInpInput.className = "cart__quantity-input";
+    cartItemQtyInpInput.setAttribute("id", "cart-amount");
+    cartItemQtyInpInput.type = "number";
+    cartItemQtyInpInput.value = amount;
+    var cartItemDelBtn = document.createElement('button');
+    cartItemDelBtn.className = "cart__item-delete-button btn btn-danger";
+    cartItemDelBtn.type = "button";
+    cartItemDelBtn.textContent = "Убрать";
+    cartItemQtyDelBtnDiv.append(cartItemQtyInpInput, cartItemDelBtn);
+
+    var cartItemTotalPriceDiv = document.createElement('div');
+    cartItemTotalPriceDiv.className = "cart__item-total cart__column cart__item-total-price";
+    cartItemTotalPriceDiv.textContent = total;
+
+    cartRow.append(cartItemDiv, cartItemNameitemPriceSpan, cartItemQtyDelBtnDiv, cartItemTotalPriceDiv);
+
     var cartItems = document.getElementsByClassName('cart__items')[0];
     var cartItemNames = cartItems.getElementsByClassName('cart__item-name');
     var addedAmounts = cartItems.getElementsByClassName('cart__quantity-input');
@@ -217,22 +256,6 @@ function addItemToCart(title, price, amount, imageSrc, code, total){
         };
     };
 
-    var cartRowContents = `
-        <div class="cart__item cart__column">
-            <img class="cart__item-image" src="${imageSrc}">
-            <div>
-                <div class="cart__item-name">${title}</div>
-                <div class="cart__item-code">${code}</div>
-            </div>
-        </div>
-        <span class="cart__price cart__column">${price} ₽</span>
-        <div class="cart__quantity cart__column">
-            <input class="cart__quantity-input" id="cart-amount" type="number" value="${amount}">
-            <button class="cart__item-delete-button btn btn-danger" type="button">Убрать</button>
-        </div>
-        <div class="cart__item-total cart__column cart__item-total-price">${total} ₽</div>
-        `;
-    cartRow.innerHTML = cartRowContents;
     cartItems.append(cartRow);
     alert("Товар успешно добавлен");
     cartRow.getElementsByClassName('cart__item-delete-button')[0].addEventListener('click', removeCartItem);
