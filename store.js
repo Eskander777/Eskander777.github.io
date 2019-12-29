@@ -8,42 +8,42 @@ function ready() {
     
     loadGoods()
 
-    var removeCartItemButtons = document.getElementsByClassName("cart__item-delete-button");
-    for (var i = 0; i < removeCartItemButtons.length; i++) {
-        var button = removeCartItemButtons[i];
+    const removeCartItemButtons = document.getElementsByClassName("cart__item-delete-button");
+    for (let i = 0; i < removeCartItemButtons.length; i++) {
+        const button = removeCartItemButtons[i];
         button.addEventListener('click', removeCartItem);
     };
 
-    var quantityInputs = document.getElementsByClassName('cart__quantity-input');
-    for (var i = 0; i < removeCartItemButtons.length; i++) {
-        var input = quantityInputs[i];
+    const quantityInputs = document.getElementsByClassName('cart__quantity-input');
+    for (let i = 0; i < removeCartItemButtons.length; i++) {
+        const input = quantityInputs[i];
         input.addEventListener('change', quantityChanged);
     };
 
-    var addToCartButtons = document.getElementsByClassName('good__button');
-    for (var i = 0; i < addToCartButtons.length; i++) {
-        var button = addToCartButtons[i];
+    const addToCartButtons = document.getElementsByClassName('good__button');
+    for (let i = 0; i < addToCartButtons.length; i++) {
+        const button = addToCartButtons[i];
         button.addEventListener('click', addToCartClicked);
     };
 
-    var quantityToAdd = document.getElementsByClassName('good__amount');
-    for (var i = 0; i < addToCartButtons.length; i++) {
-        var amount = quantityToAdd[i];
+    const quantityToAdd = document.getElementsByClassName('good__amount');
+    for (let i = 0; i < addToCartButtons.length; i++) {
+        const amount = quantityToAdd[i];
         amount.addEventListener('change', quantityChanged);
     };
 
-    var showCartBtn = document.getElementById("myBtn");
+    const showCartBtn = document.getElementById("myBtn");
     showCartBtn.addEventListener('click', showCartFunc);
 
-    var imgs = document.getElementsByClassName("good__image");
-    for (var i = 0; i < imgs.length; i++) {
-        var img = imgs[i];
+    const imgs = document.getElementsByClassName("good__image");
+    for (let i = 0; i < imgs.length; i++) {
+        const img = imgs[i];
         img.addEventListener('click', openGoodImage);
     };
 };
 
 function loadGoods() {
-    var books = [
+    const books = [
         {title:'Война и мир',
         image:'https://b1.culture.ru/c/365442.jpg',
         description: '«Война и мир» — роман-эпопея Льва Николаевича Толстого. Историко-философская мысль автора большей частью проникает в роман не в виде рассуждений, а в гениально схваченных подробностях и цельных картинах, истинный смысл которых нетрудно понять всякому вдумчивому читателю.',
@@ -91,32 +91,32 @@ function loadGoods() {
     itemButtonField = document.createElement("button");
         for (i = 0; i < books.length; i++) {
 
-            good = document.importNode(itemDiv, true);
+            const good = document.importNode(itemDiv, true);
             good.innerHTML = "";
 
-            goodImage = document.importNode(itemImg, true);
-            goodDivPrice = document.importNode(itemDiv, true);
+            const goodImage = document.importNode(itemImg, true);
+            const goodDivPrice = document.importNode(itemDiv, true);
             goodDivPrice.innerHTML = "";
 
-            goodSpanVal = document.importNode(itemSpan, true);
-            goodSpanCur = document.importNode(itemSpan, true);
+            const goodSpanVal = document.importNode(itemSpan, true);
+            const goodSpanCur = document.importNode(itemSpan, true);
 
-            goodDivDescription = document.importNode(itemDiv, true);
+            const goodDivDescription = document.importNode(itemDiv, true);
             goodDivDescription.innerHTML = "";
-            goodDescription = document.importNode(itemp, true);
-            goodTitle = document.importNode(itemH3, true);;
-            goodCode = document.importNode(itemDiv, true);
+            const goodDescription = document.importNode(itemp, true);
+            const goodTitle = document.importNode(itemH3, true);;
+            const goodCode = document.importNode(itemDiv, true);
 
             good.className = "good col";
 
             goodImage.setAttribute("src", books[i].image);
             goodImage.setAttribute("alt",  books[i].title)
-            goodImage.className ="good__image";
+            goodImage.className ="good__image rounded-circle";
 
-            goodActionsDiv = document.importNode(itemDiv, true);
+            const goodActionsDiv = document.importNode(itemDiv, true);
             goodActionsDiv.innerHTML = "";
-            itemInput = document.importNode(itemInputField, true);
-            itemButton = document.importNode(itemButtonField, true);
+            const itemInput = document.importNode(itemInputField, true);
+            const itemButton = document.importNode(itemButtonField, true);
 
             goodDivPrice.className = "good__price";
             goodSpanVal.className = "good__price-val";
@@ -150,8 +150,8 @@ function loadGoods() {
   };
 
 function showCartFunc() {
-    var modal = document.getElementById("myModal");
-    var span = document.getElementsByClassName("close")[0];
+    const modal = document.getElementById("myModal");
+    const span = document.getElementsByClassName("close")[0];
     modal.style.display = "block";
 
     span.onclick = function() {
@@ -160,11 +160,11 @@ function showCartFunc() {
 };
 
 function openGoodImage(event) {
-    var imageModal = document.getElementById("myImageModal");
-    var modalImg = document.getElementById("img01");
-    var captionText = document.getElementById("caption");
-    var spanImage = document.getElementsByClassName("closeImageModal")[0];
-    var img = event.target;
+    const imageModal = document.getElementById("myImageModal");
+    const modalImg = document.getElementById("img01");
+    const captionText = document.getElementById("caption");
+    const spanImage = document.getElementsByClassName("closeImageModal")[0];
+    const img = event.target;
     imageModal.style.display = "block";
     modalImg.src = img.src;
     captionText.innerHTML = img.alt;
@@ -175,13 +175,13 @@ function openGoodImage(event) {
 };
 
 function removeCartItem(event) {
-    var buttonClicked = event.target;
+    const buttonClicked = event.target;
     buttonClicked.parentElement.parentElement.remove();
     updateCartTotal();
 };
 
 function quantityChanged(event) {
-    var input = event.target;
+    const input = event.target;
     if (isNaN(input.value) || input.value <= 0 || input.value >= 1000){
         input.value = 1;
     };
@@ -189,50 +189,73 @@ function quantityChanged(event) {
 };
 
 function addToCartClicked(event) {
-    var button = event.target;
-    var shopItem = button.parentElement.parentElement;
-    var title = shopItem.getElementsByClassName('good__description-title')[0].innerText;
-    var priceRaw = shopItem.getElementsByClassName('good__price')[0].innerText;
-    var amount = shopItem.getElementsByClassName('good__amount')[0].value;
-    var imageSrc = shopItem.getElementsByClassName('good__image')[0].src;
-    var code = shopItem.getElementsByClassName('good__code')[0].innerText;
-    var price = parseFloat(priceRaw.replace('rub', ''));
-    var total = price * amount;
+    const button = event.target;
+    const shopItem = button.parentElement.parentElement;
+    const title = shopItem.getElementsByClassName('good__description-title')[0].innerText;
+    const priceRaw = shopItem.getElementsByClassName('good__price')[0].innerText;
+    const amount = shopItem.getElementsByClassName('good__amount')[0].value;
+    const imageSrc = shopItem.getElementsByClassName('good__image')[0].src;
+    const code = shopItem.getElementsByClassName('good__code')[0].innerText;
+    const price = parseFloat(priceRaw.replace('rub', ''));
+    const total = price * amount;
     addItemToCart(title, price, amount, imageSrc, code, total);
     updateCartTotal();
 };
 
 function addItemToCart(title, price, amount, imageSrc, code, total){
-    var cartRow = document.createElement('div');
+    const cartRow = document.createElement('div');
     cartRow.classList.add('cart__row');
-    var cartItems = document.getElementsByClassName('cart__items')[0];
-    var cartItemNames = cartItems.getElementsByClassName('cart__item-name');
-    var addedAmounts = cartItems.getElementsByClassName('cart__quantity-input');
-    for (var i = 0; i < cartItemNames.length; i++){
+
+    const cartItemDiv = document.createElement('div');
+    cartItemDiv.className = "cart__item cart__column";
+    const cartItemImg = document.createElement('img')
+    cartItemImg.className = "cart__item-image"
+    cartItemImg.setAttribute("src", imageSrc)
+    const cartItemNameCodeDiv = document.createElement('div');
+    const cartItemNameDiv = document.createElement('div');
+    cartItemNameDiv.className = "cart__item-name";
+    cartItemNameDiv.textContent = title;
+    const cartItemCodeDiv = document.createElement('div');
+    cartItemCodeDiv.className = "cart__item-code"
+    cartItemCodeDiv.textContent = code;
+    cartItemNameCodeDiv.append(cartItemNameDiv, cartItemCodeDiv);
+    cartItemDiv.append(cartItemImg, cartItemNameCodeDiv)
+
+    const cartItemNameitemPriceSpan = document.createElement('span');
+    cartItemNameitemPriceSpan.className = "cart__price cart__column";
+    cartItemNameitemPriceSpan.textContent = price + " ₽";
+
+    const cartItemQtyDelBtnDiv = document.createElement('div');
+    cartItemQtyDelBtnDiv.className = "cart__quantity cart__column";
+    const cartItemQtyInpInput = document.createElement('input');
+    cartItemQtyInpInput.className = "cart__quantity-input";
+    cartItemQtyInpInput.setAttribute("id", "cart-amount");
+    cartItemQtyInpInput.type = "number";
+    cartItemQtyInpInput.value = amount;
+    const cartItemDelBtn = document.createElement('button');
+    cartItemDelBtn.className = "cart__item-delete-button btn btn-danger";
+    cartItemDelBtn.type = "button";
+    cartItemDelBtn.textContent = "Убрать";
+    cartItemQtyDelBtnDiv.append(cartItemQtyInpInput, cartItemDelBtn);
+
+    const cartItemTotalPriceDiv = document.createElement('div');
+    cartItemTotalPriceDiv.className = "cart__item-total cart__column cart__item-total-price";
+    cartItemTotalPriceDiv.textContent = total;
+
+    cartRow.append(cartItemDiv, cartItemNameitemPriceSpan, cartItemQtyDelBtnDiv, cartItemTotalPriceDiv);
+
+    const cartItems = document.getElementsByClassName('cart__items')[0];
+    const cartItemNames = cartItems.getElementsByClassName('cart__item-name');
+    const addedAmounts = cartItems.getElementsByClassName('cart__quantity-input');
+    for (let i = 0; i < cartItemNames.length; i++){
         if(cartItemNames[i].innerText == title){
-            var addedAmount = parseInt(addedAmounts[i].value);
+            const addedAmount = parseInt(addedAmounts[i].value);
             addedAmount += parseInt(amount);
             document.getElementsByClassName('cart__quantity-input')[i].value = addedAmount;
             return;
         };
     };
 
-    var cartRowContents = `
-        <div class="cart__item cart__column">
-            <img class="cart__item-image" src="${imageSrc}">
-            <div>
-                <div class="cart__item-name">${title}</div>
-                <div class="cart__item-code">${code}</div>
-            </div>
-        </div>
-        <span class="cart__price cart__column">${price} ₽</span>
-        <div class="cart__quantity cart__column">
-            <input class="cart__quantity-input" id="cart-amount" type="number" value="${amount}">
-            <button class="cart__item-delete-button btn btn-danger" type="button">Убрать</button>
-        </div>
-        <div class="cart__item-total cart__column cart__item-total-price">${total} ₽</div>
-        `;
-    cartRow.innerHTML = cartRowContents;
     cartItems.append(cartRow);
     alert("Товар успешно добавлен");
     cartRow.getElementsByClassName('cart__item-delete-button')[0].addEventListener('click', removeCartItem);
@@ -240,17 +263,17 @@ function addItemToCart(title, price, amount, imageSrc, code, total){
 };
 
 function updateCartTotal() {
-    var cartItemContainer = document.getElementsByClassName('cart__items')[0];
-    var cartRows = cartItemContainer.getElementsByClassName('cart__row');
-    var total = 0;
-    var totalAmount = 0;
-    for (var i = 0; i < cartRows.length; i++) {
-        var cartRow = cartRows[i];
-        var priceElement = cartRow.getElementsByClassName('cart__price')[0];
-        var quantityElement = cartRow.getElementsByClassName('cart__quantity-input')[0];
-        var price = parseFloat(priceElement.innerText.replace('rub', ''));
-        var quantity = parseInt(quantityElement.value);
-        var totalForItem = 0;
+    const cartItemContainer = document.getElementsByClassName('cart__items')[0];
+    const cartRows = cartItemContainer.getElementsByClassName('cart__row');
+    let total = 0;
+    let totalAmount = 0;
+    for (let i = 0; i < cartRows.length; i++) {
+        const cartRow = cartRows[i];
+        const priceElement = cartRow.getElementsByClassName('cart__price')[0];
+        const quantityElement = cartRow.getElementsByClassName('cart__quantity-input')[0];
+        const price = parseFloat(priceElement.innerText.replace('rub', ''));
+        const quantity = parseInt(quantityElement.value);
+        let totalForItem = 0;
         totalForItem = totalForItem + (price * quantity);
         document.getElementsByClassName('cart__item-total-price')[i].innerText = totalForItem + " ₽";
         total = total + (price * quantity);
