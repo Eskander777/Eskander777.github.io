@@ -91,21 +91,21 @@ function loadGoods() {
     itemButtonField = document.createElement("button");
         for (i = 0; i < books.length; i++) {
 
-            const good = document.importNode(itemDiv, true);
+            const good = document.createElement("div");
             good.innerHTML = "";
 
-            const goodImage = document.importNode(itemImg, true);
-            const goodDivPrice = document.importNode(itemDiv, true);
+            const goodImage = document.createElement("img");
+            const goodDivPrice = document.createElement("div");
             goodDivPrice.innerHTML = "";
 
-            const goodSpanVal = document.importNode(itemSpan, true);
-            const goodSpanCur = document.importNode(itemSpan, true);
+            const goodSpanVal = document.createElement("span");
+            const goodSpanCur = document.createElement("span");
 
-            const goodDivDescription = document.importNode(itemDiv, true);
+            const goodDivDescription = document.createElement("div");
             goodDivDescription.innerHTML = "";
-            const goodDescription = document.importNode(itemp, true);
-            const goodTitle = document.importNode(itemH3, true);;
-            const goodCode = document.importNode(itemDiv, true);
+            const goodDescription = document.createElement("p");
+            const goodTitle = document.createElement("h3");;
+            const goodCode = document.createElement("div");
 
             good.className = "good col";
 
@@ -113,10 +113,10 @@ function loadGoods() {
             goodImage.setAttribute("alt",  books[i].title)
             goodImage.className ="good__image rounded-circle";
 
-            const goodActionsDiv = document.importNode(itemDiv, true);
+            const goodActionsDiv = document.createElement("div");
             goodActionsDiv.innerHTML = "";
-            const itemInput = document.importNode(itemInputField, true);
-            const itemButton = document.importNode(itemButtonField, true);
+            const itemInput = document.createElement("input");
+            const itemButton = document.createElement("button");
 
             goodDivPrice.className = "good__price";
             goodSpanVal.className = "good__price-val";
@@ -143,9 +143,10 @@ function loadGoods() {
             goodActionsDiv.append(itemInput, itemButton);
 
             good.append(goodImage, goodDivPrice, goodDivDescription, goodActionsDiv, goodActionsDiv);
+            const templateDiv = document.getElementById("template")
             itemDiv.append(good);
             
-        document.body.appendChild(itemDiv);
+            templateDiv.append(itemDiv);
     };
   };
 
@@ -203,30 +204,30 @@ function addToCartClicked(event) {
 };
 
 function addItemToCart(title, price, amount, imageSrc, code, total){
-    const cartRow = document.createElement('div');
-    cartRow.classList.add('cart__row');
+    const cartTr = document.createElement('tr');
+    cartTr.classList.add('cart__row');
 
-    const cartItemDiv = document.createElement('div');
-    cartItemDiv.className = "cart__item cart__column";
     const cartItemImg = document.createElement('img')
     cartItemImg.className = "cart__item-image"
     cartItemImg.setAttribute("src", imageSrc)
-    const cartItemNameCodeDiv = document.createElement('div');
+    const cartItemNameCodeTd = document.createElement('td');
     const cartItemNameDiv = document.createElement('div');
     cartItemNameDiv.className = "cart__item-name";
     cartItemNameDiv.textContent = title;
     const cartItemCodeDiv = document.createElement('div');
     cartItemCodeDiv.className = "cart__item-code"
     cartItemCodeDiv.textContent = code;
-    cartItemNameCodeDiv.append(cartItemNameDiv, cartItemCodeDiv);
-    cartItemDiv.append(cartItemImg, cartItemNameCodeDiv)
+    const cartImageTd = document.createElement('td');
+    cartImageTd.className = "cart__image-td"
+    cartImageTd.append(cartItemImg)
+    cartItemNameCodeTd.append(cartItemNameDiv, cartItemCodeDiv);
 
-    const cartItemNameitemPriceSpan = document.createElement('span');
-    cartItemNameitemPriceSpan.className = "cart__price cart__column";
-    cartItemNameitemPriceSpan.textContent = price + " ₽";
+    const cartItemNameitemPriceTd = document.createElement('td');
+    cartItemNameitemPriceTd.className = "cart__price cart__column";
+    cartItemNameitemPriceTd.textContent = price + " ₽";
 
-    const cartItemQtyDelBtnDiv = document.createElement('div');
-    cartItemQtyDelBtnDiv.className = "cart__quantity cart__column";
+    const cartItemQtyDelBtnTd = document.createElement('td');
+    cartItemQtyDelBtnTd.className = "cart__quantity cart__column";
     const cartItemQtyInpInput = document.createElement('input');
     cartItemQtyInpInput.className = "cart__quantity-input";
     cartItemQtyInpInput.setAttribute("id", "cart-amount");
@@ -236,30 +237,30 @@ function addItemToCart(title, price, amount, imageSrc, code, total){
     cartItemDelBtn.className = "cart__item-delete-button btn btn-danger";
     cartItemDelBtn.type = "button";
     cartItemDelBtn.textContent = "Убрать";
-    cartItemQtyDelBtnDiv.append(cartItemQtyInpInput, cartItemDelBtn);
+    cartItemQtyDelBtnTd.append(cartItemQtyInpInput, cartItemDelBtn);
 
-    const cartItemTotalPriceDiv = document.createElement('div');
-    cartItemTotalPriceDiv.className = "cart__item-total cart__column cart__item-total-price";
-    cartItemTotalPriceDiv.textContent = total;
+    const cartItemTotalPriceTd = document.createElement('td');
+    cartItemTotalPriceTd.className = "cart__item-total cart__column cart__item-total-price";
+    cartItemTotalPriceTd.textContent = total;
 
-    cartRow.append(cartItemDiv, cartItemNameitemPriceSpan, cartItemQtyDelBtnDiv, cartItemTotalPriceDiv);
+    cartTr.append(cartImageTd, cartItemNameCodeTd, cartItemNameitemPriceTd, cartItemQtyDelBtnTd, cartItemTotalPriceTd);
 
     const cartItems = document.getElementsByClassName('cart__items')[0];
     const cartItemNames = cartItems.getElementsByClassName('cart__item-name');
     const addedAmounts = cartItems.getElementsByClassName('cart__quantity-input');
     for (let i = 0; i < cartItemNames.length; i++){
         if(cartItemNames[i].innerText == title){
-            const addedAmount = parseInt(addedAmounts[i].value);
+            let addedAmount = parseInt(addedAmounts[i].value);
             addedAmount += parseInt(amount);
             document.getElementsByClassName('cart__quantity-input')[i].value = addedAmount;
             return;
         };
     };
 
-    cartItems.append(cartRow);
+    cartItems.append(cartTr);
     alert("Товар успешно добавлен");
-    cartRow.getElementsByClassName('cart__item-delete-button')[0].addEventListener('click', removeCartItem);
-    cartRow.getElementsByClassName('cart__quantity-input')[0].addEventListener('change', quantityChanged);
+    cartTr.getElementsByClassName('cart__item-delete-button')[0].addEventListener('click', removeCartItem);
+    cartTr.getElementsByClassName('cart__quantity-input')[0].addEventListener('change', quantityChanged);
 };
 
 function updateCartTotal() {
@@ -268,9 +269,9 @@ function updateCartTotal() {
     let total = 0;
     let totalAmount = 0;
     for (let i = 0; i < cartRows.length; i++) {
-        const cartRow = cartRows[i];
-        const priceElement = cartRow.getElementsByClassName('cart__price')[0];
-        const quantityElement = cartRow.getElementsByClassName('cart__quantity-input')[0];
+        const cartTr = cartRows[i];
+        const priceElement = cartTr.getElementsByClassName('cart__price')[0];
+        const quantityElement = cartTr.getElementsByClassName('cart__quantity-input')[0];
         const price = parseFloat(priceElement.innerText.replace('rub', ''));
         const quantity = parseInt(quantityElement.value);
         let totalForItem = 0;

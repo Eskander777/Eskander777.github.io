@@ -5,7 +5,10 @@
     <title>Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A task for JS developer job">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css" />
     <script src="store.js" async></script>
 </head>
@@ -30,21 +33,30 @@
 
     <div class="modal__content">
         <span class="close">&times;</span>
-        <div class="cart">
+        <div class="cart container">
                 <h2>Корзина</h2>
-            <div class="cart__row">
-                <span class="cart__item cart__header cart__column">Наименование</span>
-                <span class="cart__price cart__header cart__column">Цена за единицу</span>
-                <span class="cart__quantity cart__header cart__column">Кол-во</span>
-                <span class="cart__item-total cart__header cart__column">Общая стоимость позиции</span>
-            </div>
-            <div class="cart__items">
-            </div>
+            <table class="table table-hover .table-responsive-md">
+                <thead>
+            <tr class="cart__row">
+                <th colspan="2">Наименование</th>
+                <th>Цена за единицу</th>
+                <th>Кол-во</th>
+                <th>Общая стоимость позиции</th>
+            </tr>
+                </thead>
+            <tbody class="cart__items">
+            </tbody>
+            </table>
+            <div>
             <div class="cart__total">
                 <div class="cart__total-title">Общее кол-во</div>
                 <span class="cart__total-amount">0</span>
                 <div class="cart__total-title">Общая стоимость</div>
                 <span class="cart__total-price">0 ₽</span>
+            </div>
+            <div class="col text-center">
+                <button class="register-order-btn btn btn-success">Сформировать заказ</button>
+            </div>
             </div>
         </div>
     </div>
