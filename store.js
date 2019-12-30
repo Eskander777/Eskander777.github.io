@@ -35,6 +35,9 @@ function ready() {
     const showCartBtn = document.getElementById("myBtn");
     showCartBtn.addEventListener('click', showCartFunc);
 
+    const createOrderBtn = document.getElementById("register-order-btn");
+    createOrderBtn.addEventListener('click', createOrderFunc);
+
     const imgs = document.getElementsByClassName("good__image");
     for (let i = 0; i < imgs.length; i++) {
         const img = imgs[i];
@@ -164,13 +167,13 @@ function openGoodImage(event) {
     const imageModal = document.getElementById("myImageModal");
     const modalImg = document.getElementById("img01");
     const captionText = document.getElementById("caption");
-    const spanImage = document.getElementsByClassName("closeImageModal")[0];
+    const closeImageSpan = document.getElementsByClassName("closeImageModal")[0];
     const img = event.target;
     imageModal.style.display = "block";
     modalImg.src = img.src;
     captionText.innerHTML = img.alt;
 
-    spanImage.onclick = function() {
+    closeImageSpan.onclick = function() {
         imageModal.style.display = "none";
       };
 };
@@ -283,6 +286,21 @@ function updateCartTotal() {
     total = Math.round(total * 100) / 100;
     document.getElementsByClassName('cart__total-amount')[0].innerText = totalAmount;
     document.getElementsByClassName('cart__total-price')[0].innerText = total + ' ₽';
+};
+
+function createOrderFunc() {
+    const customerModal = document.getElementById("MyModalCustomer");
+    const cancelBtn = document.getElementById("cancel-button");
+    const submitBtn = document.getElementById("submit-button");
+    customerModal.style.display = "block";
+
+    cancelBtn.onclick = function() {
+        customerModal.style.display = "none";
+      };
+
+      submitBtn.onclick = function() {
+          alert("Submit is clicked!")
+      };
 };
 
 })();
