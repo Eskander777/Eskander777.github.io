@@ -326,7 +326,7 @@ body {
       background-color: rgba(0,0,0,0.4);
     }
   
-    .modal-for-customer__content {
+.modal-for-customer__content {
         background-color: #fefefe;
         margin: auto;
         padding: 20px;
