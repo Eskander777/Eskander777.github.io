@@ -63,7 +63,7 @@
 
     <div id="MyModalCustomer" class="modal-for-customer">
         <div class="modal-for-customer__content">
-            <form id="customer-form">
+            <form id="customer-form" action="http://127.0.0.1:5000/customer">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="customerFirstName">Имя</label>
@@ -104,8 +104,8 @@
                       <label for="inputZip">Индекс</label>
                       <input type="text" class="form-control" id="inputZip">
                     </div>
-                <button id="submit-button" class="btn btn-outline-success">Submit</button>
-                <button id="cancel-button" class="btn btn-outline-danger">Cancel</button>
+                <input type="submit" id="submit-button" class="btn btn-outline-success">
+                <a class="btn btn-outline-danger" href="index.html">Cancel</a>
               </form> 
             
         </div>

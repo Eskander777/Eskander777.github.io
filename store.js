@@ -290,17 +290,82 @@ function updateCartTotal() {
 
 function createOrderFunc() {
     const customerModal = document.getElementById("MyModalCustomer");
-    const cancelBtn = document.getElementById("cancel-button");
-    const submitBtn = document.getElementById("submit-button");
+    const submitBtn = document.getElementById("customer-form");
+    submitBtn.addEventListener("submit", submitForm);
     customerModal.style.display = "block";
 
-    cancelBtn.onclick = function() {
-        customerModal.style.display = "none";
-      };
+      function submitForm(event) {
+        event.preventDefault();
+    
+        const customerFirstName = event.target.customerFirstName.value;
+        const customerLastName = event.target.customerLastName.value;
+        const inputEmail4 = event.target.inputEmail4.value;
+        const inputPassword4 = event.target.inputPassword4.value;
+        const inputAddress = event.target.inputAddress.value;
+        const inputCity = event.target.inputCity.value;
+        const inputState = event.target.inputState.value;
+        const inputZip = event.target.inputZip.value;
+        
+        const cartItems = document.getElementsByClassName('cart__items')[0];
+        const cartRows = cartItems.getElementsByClassName('cart__row');
+        const cartItemNames = cartItems.getElementsByClassName('cart__item-name');
+        const cartItemAmounts = cartItems.getElementsByClassName('cart__quantity-input');
+        const cartItemTotalPrices = cartItems.getElementsByClassName('cart__item-total-price');
+        let cartOrder = [];
+        for (let i = 0; i < cartRows.length; i++) {
+            const cartItemName = cartItemNames[i].innerText;
+            const cartItemAmount = cartItemAmounts[i].value;
+            const cartItemTotalPrice = cartItemTotalPrices[i].innerText;
+            let cartItem = {
+                "cartItemName": cartItemName,
+                "cartItemAmount": cartItemAmount,
+                "cartItemTotalPrice": cartItemTotalPrice,
+            };
+            cartOrder.push(cartItem)
+            cartItem = {}
+        };
 
-      submitBtn.onclick = function() {
-          alert("Submit is clicked!")
-      };
+        const cartTotalPrice = document.getElementsByClassName('cart__total-price')[0].innerText;
+        const cartTotalAmount = document.getElementsByClassName('cart__total-amount')[0].innerText;
+        const cartOrderTotal = {
+            "cartTotalPrice": cartTotalPrice,
+            "cartTotalAmount": cartTotalAmount,
+        };
+        cartOrder.push(cartOrderTotal)
+    
+        let completeCartOrder = {
+            "customerFirstName": customerFirstName,
+            "customerLastName": customerLastName,
+            "inputEmail4": inputEmail4,
+            "inputPassword4": inputPassword4,
+            "inputAddress": inputAddress,
+            "inputCity": inputCity,
+            "inputState": inputState,
+            "inputZip": inputZip,
+            "cartOrder": cartOrder,
+        };
+        
+        console.log(completeCartOrder)
+
+        let request = new Request(event.target.action, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify(completeCartOrder),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        fetch(request).then(
+            function(response) {
+                console.log(response);
+            },
+            function(error) {
+                console.error(error);
+            }
+        );
+        console.log('Запрос отправляется');
+    }
 };
 
 })();
