@@ -9,8 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css" />
-    <script src="store.js" async></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script src="{{ url_for('static', filename='js/store.js') }}"async></script>
 </head>
 <body>
     <nav class="navbar navbar-light fixed-top bg-light">
@@ -63,7 +63,7 @@
 
     <div id="MyModalCustomer" class="modal-for-customer">
         <div class="modal-for-customer__content">
-            <form id="customer-form" action="http://127.0.0.1:5000/customer">
+            <form id="customer-form" action="/customer">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="customerFirstName">Имя</label>
@@ -105,7 +105,7 @@
                       <input type="text" class="form-control" id="inputZip">
                     </div>
                 <input type="submit" id="submit-button" class="btn btn-outline-success">
-                <a class="btn btn-outline-danger" href="index.html">Отмена</a>
+                <a class="btn btn-outline-danger" href="/">Отмена</a>
               </form> 
             
         </div>
