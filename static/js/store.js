@@ -5,8 +5,12 @@
 };
 
 function ready() {
+
+    const loader = document.querySelector(".loader");
+    console.log(loader);
+    loader.className += " hidden";
     
-    loadGoods(booksLoad)
+    loadGoods(booksLoad);
 
     const removeCartItemButtons = document.getElementsByClassName("cart__item-delete-button");
     for (let i = 0; i < removeCartItemButtons.length; i++) {
@@ -46,6 +50,7 @@ function ready() {
 };
 
 function loadGoods(booksLoad) {
+
     const books = JSON.parse(booksLoad);
 
     const itemDiv = document.createElement('div');

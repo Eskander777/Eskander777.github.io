@@ -10,7 +10,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-    <script src="{{ url_for('static', filename='js/store.js') }}"async></script>
+    <script>
+      const booksLoad = '{{ books|tojson }}';
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/store.js') }}"async></script>
 </head>
 <body>
     <nav class="navbar navbar-light fixed-top bg-light">
@@ -18,14 +21,16 @@
         <button class="show-cart btn btn-secondary my-2 my-sm-0" id="myBtn">Показать корзину</button>
     </nav>
 
-    <div id="myImageModal" class="modal-for-image">
-        <span class="closeImageModal">&times;</span>
-        <img class="modal-image__content" id="img01">
-        <div id="caption"></div>
-    </div>
+
 
     <section>
+      <div class="loader"></div>
         <div id="template">
+        </div>
+        <div id="myImageModal" class="modal-for-image">
+          <span class="closeImageModal">&times;</span>
+          <img class="modal-image__content" id="img01">
+          <div id="caption"></div>
         </div>
     </section>
 
@@ -79,7 +84,7 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="inputPassword4">Пароль</label>
-                      <input type="password" class="form-control" id="inputPassword4" placeholder="Пароль">
+                      <input type="password" class="form-control" id="inputPassword4" autocomplete="off" placeholder="Пароль">
                     </div>
                   </div>
                   <div class="form-group">
