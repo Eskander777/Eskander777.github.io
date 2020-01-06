@@ -4,7 +4,7 @@ import json
 app = Flask(__name__)
 
 
-@app.route('/customer', methods=['GET', 'POST'])
+@app.route('/customer', methods=['POST'])
 def customer_form():
     order_data = request.get_json(force=True)
     user = order_data.copy()

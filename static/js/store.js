@@ -7,9 +7,8 @@
 function ready() {
 
     const loader = document.querySelector(".loader");
-    console.log(loader);
     loader.className += " hidden";
-    
+        
     loadGoods(booksLoad);
 
     const removeCartItemButtons = document.getElementsByClassName("cart__item-delete-button");
@@ -244,13 +243,13 @@ function updateCartTotal() {
         const cartTr = cartRows[i];
         const priceElement = cartTr.getElementsByClassName('cart__price')[0];
         const quantityElement = cartTr.getElementsByClassName('cart__quantity-input')[0];
-        const price = parseFloat(priceElement.innerText.replace('rub', ''));
+        const price = parseFloat(priceElement.innerText);
         const quantity = parseInt(quantityElement.value);
         let totalForItem = 0;
-        totalForItem = totalForItem + (price * quantity);
+        totalForItem += price * quantity;
         document.getElementsByClassName('cart__item-total-price')[i].innerText = totalForItem + " ₽";
-        total = total + (price * quantity);
-        totalAmount  = totalAmount + quantity;
+        total += price * quantity;
+        totalAmount += quantity;
     };
     total = Math.round(total * 100) / 100;
     document.getElementsByClassName('cart__total-amount')[0].innerText = totalAmount;
@@ -318,7 +317,6 @@ function createOrderFunc() {
 
         let request = new Request(event.target.action, {
             method: 'POST',
-            mode: 'no-cors',
             body: JSON.stringify(completeCartOrder),
             headers: {
                 'Content-Type': 'application/json',
@@ -327,13 +325,12 @@ function createOrderFunc() {
 
         fetch(request).then(
             function(response) {
-                console.log(response);
+                console.log("Response code: " + response.status);
             },
             function(error) {
                 console.error(error);
             }
         );
-        console.log('Запрос отправляется');
     }
 };
 
