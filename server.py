@@ -11,21 +11,38 @@ def customer_form():
         user = order_data.copy()
         order_items = user.pop("cartOrder")
 
-        with open('customers.json', encoding='utf8') as c_r:
-            customers = json.load(c_r)
-        customers.append(user)
-        with open('customers.json', 'w', encoding='utf8') as c:
-            json.dump(customers, c, ensure_ascii=False)
-        with open('orders.json', encoding='utf8') as o_r:
-            orders = json.load(o_r)
-        orders.append(order_data)
-        with open('orders.json', 'w', encoding='utf8') as  o:
-            json.dump(orders, o, ensure_ascii=False)
+        with open('books.json', encoding='utf-8') as f:
+            books = json.load(f)
+
+        for order_item in order_items:
+            if 'cartItemName' not in order_item:
+                return "Вы не добавили товары в корзину!"
+            else:
+                for book in books:
+                    if order_item['cartItemName'] == book['title']:
+                        if int(book['amount']) >= int(order_item['cartItemAmount']):
+
+                            with open('customers.json', encoding='utf8') as c_r:
+                                customers = json.load(c_r)
+                            customers.append(user)
+                            with open('customers.json', 'w', encoding='utf8') as c:
+                                json.dump(customers, c, ensure_ascii=False)
+                            with open('orders.json', encoding='utf8') as o_r:
+                                orders = json.load(o_r)
+                            orders.append(order_data)
+                            with open('orders.json', 'w', encoding='utf8') as  o:
+                                json.dump(orders, o, ensure_ascii=False)
+                            
+                            return "Ваш заказ добавлен к 'Заказам'"
+                        
+                        else:
+                            return "Не достаточно единиц на складе!"
+
+                else:
+                    return "Такая книга не представлена!"
+
     else:
-        pass
-
-    return "Your order is added to 'Orders'"
-
+        return "Server Error"
 
 @app.route('/')
 def show_books():

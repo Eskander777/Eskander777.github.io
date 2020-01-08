@@ -325,7 +325,10 @@ function createOrderFunc() {
 
         fetch(request).then(
             function(response) {
-                console.log("Response code: " + response.status);
+                if (response.ok) {
+                    response.text().then(function(result) {alert(result)});
+                    location.reload();
+                };
             },
             function(error) {
                 console.error(error);
