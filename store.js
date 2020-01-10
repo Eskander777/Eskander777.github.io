@@ -6,10 +6,22 @@
 
 function ready() {
 
-    const loader = document.querySelector(".loader");
-    loader.className += " hidden";
-        
-    loadGoods(booksLoad);
+    var firebaseConfig = {
+        apiKey: "AIzaSyAIJvQfRKYpXrKrvdd7b-LFkxZkME8fDVk",
+        authDomain: "book-store-95eba.firebaseapp.com",
+        databaseURL: "https://book-store-95eba.firebaseio.com",
+        projectId: "book-store-95eba",
+        storageBucket: "book-store-95eba.appspot.com",
+        messagingSenderId: "521851003605",
+        appId: "1:521851003605:web:313c060519f784c23cb85c"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      const loader = document.querySelector(".loader");
+
+      var database = firebase.database();
+      database.ref().child("books").once("value").then (function(snapshot) {loadGoods(snapshot.val())}).then (loader.className += " hidden");
 
     const removeCartItemButtons = document.getElementsByClassName("cart__item-delete-button");
     for (let i = 0; i < removeCartItemButtons.length; i++) {
@@ -50,7 +62,7 @@ function ready() {
 
 function loadGoods(booksLoad) {
 
-    const books = JSON.parse(booksLoad);
+    const books = booksLoad;
 
     const itemDiv = document.createElement('div');
     itemDiv.className = "goods row"
