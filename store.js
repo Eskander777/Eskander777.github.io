@@ -19,7 +19,7 @@ function ready() {
 
       const database = firebase.database();
 
-    loadFireBase(database);
+      loadFireBase(database);
 
     const removeCartItemButtons = document.getElementsByClassName("cart__item-delete-button");
     for (let i = 0; i < removeCartItemButtons.length; i++) {
@@ -42,9 +42,11 @@ function ready() {
 
 
 function loadFireBase(database) {
-      database.ref().child("books").once("value").then (function(snapshot) {loadGoods(snapshot.val())});
+      database.ref().child("books").once("value").then (function(snapshot) {
+          const books = snapshot.val();
+          loadGoods(books);
+    });
 };
-
 
 function loadGoods(books) {
 
@@ -78,8 +80,6 @@ function loadGoods(books) {
             const goodCode = document.createElement("div");
 
             good.className = "good col";
-
-            console.log(parseInt(books[i].amount))
 
             goodImage.setAttribute("src", books[i].image);
             goodImage.setAttribute("alt",  books[i].title)
@@ -138,8 +138,7 @@ function loadGoods(books) {
         const img = imgs[i];
         img.addEventListener('click', openGoodImage);
     };
-
-  };
+};
 
 
 function showCartFunc() {
@@ -305,15 +304,18 @@ function createOrderFunc(database) {
         const cartItems = document.getElementsByClassName('cart__items')[0];
         const cartRows = cartItems.getElementsByClassName('cart__row');
         const cartItemNames = cartItems.getElementsByClassName('cart__item-name');
+        const cartItemCodes = cartItems.getElementsByClassName('cart__item-code');
         const cartItemAmounts = cartItems.getElementsByClassName('cart__quantity-input');
         const cartItemTotalPrices = cartItems.getElementsByClassName('cart__item-total-price');
         let cartOrder = [];
         for (let i = 0; i < cartRows.length; i++) {
             const cartItemName = cartItemNames[i].innerText;
+            const cartItemCode = cartItemCodes[i].innerText.replace('Артикул: ', '');
             const cartItemAmount = cartItemAmounts[i].value;
             const cartItemTotalPrice = cartItemTotalPrices[i].innerText;
             let cartItem = {
                 "cartItemName": cartItemName,
+                "cartItemCode": cartItemCode,
                 "cartItemAmount": cartItemAmount,
                 "cartItemTotalPrice": cartItemTotalPrice,
             };
@@ -352,7 +354,7 @@ function createOrderFunc(database) {
             "inputZip": completeCartOrder.inputZip,
         };
         
-        console.log(completeCartOrder)
+        console.log(completeCartOrder);
         console.log(customerData);
 
         function writeOrderData() {
@@ -385,6 +387,5 @@ function createOrderFunc(database) {
         writeCustomerData()
     }
 };
-
 
 })();
