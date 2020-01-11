@@ -4,9 +4,22 @@
     ready();
 };
 
-async function ready() {
+function ready() {
 
-    loadFireBase();
+    const firebaseConfig = {
+        apiKey: "AIzaSyAIJvQfRKYpXrKrvdd7b-LFkxZkME8fDVk",
+        authDomain: "book-store-95eba.firebaseapp.com",
+        databaseURL: "https://book-store-95eba.firebaseio.com",
+        projectId: "book-store-95eba",
+        storageBucket: "book-store-95eba.appspot.com",
+        messagingSenderId: "521851003605",
+        appId: "1:521851003605:web:313c060519f784c23cb85c"
+      };
+      firebase.initializeApp(firebaseConfig);
+
+      const database = firebase.database();
+
+    loadFireBase(database);
 
     const removeCartItemButtons = document.getElementsByClassName("cart__item-delete-button");
     for (let i = 0; i < removeCartItemButtons.length; i++) {
@@ -24,33 +37,19 @@ async function ready() {
     showCartBtn.addEventListener('click', showCartFunc);
 
     const createOrderBtn = document.getElementById("register-order-btn");
-    createOrderBtn.addEventListener('click', createOrderFunc);
+    createOrderBtn.addEventListener('click', function() {createOrderFunc(database)});
 };
 
 
-async function loadFireBase() {
-    var firebaseConfig = {
-        apiKey: "AIzaSyAIJvQfRKYpXrKrvdd7b-LFkxZkME8fDVk",
-        authDomain: "book-store-95eba.firebaseapp.com",
-        databaseURL: "https://book-store-95eba.firebaseio.com",
-        projectId: "book-store-95eba",
-        storageBucket: "book-store-95eba.appspot.com",
-        messagingSenderId: "521851003605",
-        appId: "1:521851003605:web:313c060519f784c23cb85c"
-      };
-      firebase.initializeApp(firebaseConfig);
-
-      var database = firebase.database();
+function loadFireBase(database) {
       database.ref().child("books").once("value").then (function(snapshot) {loadGoods(snapshot.val())});
 };
 
 
-function loadGoods(booksLoad) {
+function loadGoods(books) {
 
     const loader = document.querySelector(".loader");
     loader.className += " hidden"
-
-    const books = booksLoad;
 
     const itemDiv = document.createElement('div');
     itemDiv.className = "goods row"
@@ -79,6 +78,8 @@ function loadGoods(booksLoad) {
             const goodCode = document.createElement("div");
 
             good.className = "good col";
+
+            console.log(parseInt(books[i].amount))
 
             goodImage.setAttribute("src", books[i].image);
             goodImage.setAttribute("alt",  books[i].title)
@@ -283,7 +284,7 @@ function updateCartTotal() {
 };
 
 
-function createOrderFunc() {
+function createOrderFunc(database) {
     const customerModal = document.getElementById("MyModalCustomer");
     const submitBtn = document.getElementById("customer-form");
     submitBtn.addEventListener("submit", submitForm);
@@ -291,7 +292,7 @@ function createOrderFunc() {
 
       function submitForm(event) {
         event.preventDefault();
-    
+
         const customerFirstName = event.target.customerFirstName.value;
         const customerLastName = event.target.customerLastName.value;
         const inputEmail4 = event.target.inputEmail4.value;
@@ -328,7 +329,7 @@ function createOrderFunc() {
         };
         cartOrder.push(cartOrderTotal)
     
-        let completeCartOrder = {
+        const completeCartOrder = {
             "customerFirstName": customerFirstName,
             "customerLastName": customerLastName,
             "inputEmail4": inputEmail4,
@@ -339,28 +340,49 @@ function createOrderFunc() {
             "inputZip": inputZip,
             "cartOrder": cartOrder,
         };
+
+        const customerData = {
+            "customerFirstName": completeCartOrder.customerFirstName,
+            "customerLastName": completeCartOrder.customerLastName,
+            "inputEmail4": completeCartOrder.inputEmail4,
+            "inputPassword4": completeCartOrder.inputPassword4,
+            "inputAddress": completeCartOrder.inputAddress,
+            "inputCity": completeCartOrder.inputCity,
+            "inputState": completeCartOrder.inputState,
+            "inputZip": completeCartOrder.inputZip,
+        };
         
         console.log(completeCartOrder)
+        console.log(customerData);
 
-        let request = new Request(event.target.action, {
-            method: 'POST',
-            body: JSON.stringify(completeCartOrder),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        fetch(request).then(
-            function(response) {
-                if (response.ok) {
-                    response.text().then(function(result) {alert(result)});
-                    location.reload();
-                };
-            },
-            function(error) {
-                console.error(error);
+        function writeOrderData() {
+            database.ref('orders/').set({
+                completeCartOrder
+            }, function (error) {
+                if (error) {
+                    alert("Ошибка!");
+                } else {
+                    alert("Заказ добавлен к 'Заказам'!");
+                }
             }
-        );
+            );
+        };
+
+        function writeCustomerData() {
+            database.ref('customers/').set({
+                customerData
+            }, function (error) {
+                if (error) {
+                    alert("Ошибка!");
+                } else {
+                    location.reload();
+                }
+            }
+            );
+        };
+
+        writeOrderData()
+        writeCustomerData()
     }
 };
 
