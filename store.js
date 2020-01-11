@@ -4,24 +4,9 @@
     ready();
 };
 
-function ready() {
+async function ready() {
 
-    var firebaseConfig = {
-        apiKey: "AIzaSyAIJvQfRKYpXrKrvdd7b-LFkxZkME8fDVk",
-        authDomain: "book-store-95eba.firebaseapp.com",
-        databaseURL: "https://book-store-95eba.firebaseio.com",
-        projectId: "book-store-95eba",
-        storageBucket: "book-store-95eba.appspot.com",
-        messagingSenderId: "521851003605",
-        appId: "1:521851003605:web:313c060519f784c23cb85c"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-
-      const loader = document.querySelector(".loader");
-
-      var database = firebase.database();
-      database.ref().child("books").once("value").then (function(snapshot) {loadGoods(snapshot.val())}).then (loader.className += " hidden");
+    loadFireBase();
 
     const removeCartItemButtons = document.getElementsByClassName("cart__item-delete-button");
     for (let i = 0; i < removeCartItemButtons.length; i++) {
@@ -35,32 +20,35 @@ function ready() {
         input.addEventListener('change', quantityChanged);
     };
 
-    const addToCartButtons = document.getElementsByClassName('good__button');
-    for (let i = 0; i < addToCartButtons.length; i++) {
-        const button = addToCartButtons[i];
-        button.addEventListener('click', addToCartClicked);
-    };
-
-    const quantityToAdd = document.getElementsByClassName('good__amount');
-    for (let i = 0; i < addToCartButtons.length; i++) {
-        const amount = quantityToAdd[i];
-        amount.addEventListener('change', quantityChanged);
-    };
-
     const showCartBtn = document.getElementById("myBtn");
     showCartBtn.addEventListener('click', showCartFunc);
 
     const createOrderBtn = document.getElementById("register-order-btn");
     createOrderBtn.addEventListener('click', createOrderFunc);
-
-    const imgs = document.getElementsByClassName("good__image");
-    for (let i = 0; i < imgs.length; i++) {
-        const img = imgs[i];
-        img.addEventListener('click', openGoodImage);
-    };
 };
 
+
+async function loadFireBase() {
+    var firebaseConfig = {
+        apiKey: "AIzaSyAIJvQfRKYpXrKrvdd7b-LFkxZkME8fDVk",
+        authDomain: "book-store-95eba.firebaseapp.com",
+        databaseURL: "https://book-store-95eba.firebaseio.com",
+        projectId: "book-store-95eba",
+        storageBucket: "book-store-95eba.appspot.com",
+        messagingSenderId: "521851003605",
+        appId: "1:521851003605:web:313c060519f784c23cb85c"
+      };
+      firebase.initializeApp(firebaseConfig);
+
+      var database = firebase.database();
+      database.ref().child("books").once("value").then (function(snapshot) {loadGoods(snapshot.val())});
+};
+
+
 function loadGoods(booksLoad) {
+
+    const loader = document.querySelector(".loader");
+    loader.className += " hidden"
 
     const books = booksLoad;
 
@@ -131,7 +119,27 @@ function loadGoods(booksLoad) {
             
             templateDiv.append(itemDiv);
     };
+
+    const addToCartButtons = document.getElementsByClassName('good__button');
+    for (let i = 0; i < addToCartButtons.length; i++) {
+        const button = addToCartButtons[i];
+        button.addEventListener('click', addToCartClicked);
+    };
+
+    const quantityToAdd = document.getElementsByClassName('good__amount');
+    for (let i = 0; i < addToCartButtons.length; i++) {
+        const amount = quantityToAdd[i];
+        amount.addEventListener('change', quantityChanged);
+    };
+
+    const imgs = document.getElementsByClassName("good__image");
+    for (let i = 0; i < imgs.length; i++) {
+        const img = imgs[i];
+        img.addEventListener('click', openGoodImage);
+    };
+
   };
+
 
 function showCartFunc() {
     const modal = document.getElementById("myModal");
@@ -142,6 +150,7 @@ function showCartFunc() {
         modal.style.display = "none";
         };
 };
+
 
 function openGoodImage(event) {
     const imageModal = document.getElementById("myImageModal");
@@ -158,11 +167,13 @@ function openGoodImage(event) {
       };
 };
 
+
 function removeCartItem(event) {
     const buttonClicked = event.target;
     buttonClicked.parentElement.parentElement.remove();
     updateCartTotal();
 };
+
 
 function quantityChanged(event) {
     const input = event.target;
@@ -171,6 +182,7 @@ function quantityChanged(event) {
     };
     updateCartTotal();
 };
+
 
 function addToCartClicked(event) {
     const button = event.target;
@@ -185,6 +197,7 @@ function addToCartClicked(event) {
     addItemToCart(title, price, amount, imageSrc, code, total);
     updateCartTotal();
 };
+
 
 function addItemToCart(title, price, amount, imageSrc, code, total){
     const cartTr = document.createElement('tr');
@@ -246,6 +259,7 @@ function addItemToCart(title, price, amount, imageSrc, code, total){
     cartTr.getElementsByClassName('cart__quantity-input')[0].addEventListener('change', quantityChanged);
 };
 
+
 function updateCartTotal() {
     const cartItemContainer = document.getElementsByClassName('cart__items')[0];
     const cartRows = cartItemContainer.getElementsByClassName('cart__row');
@@ -267,6 +281,7 @@ function updateCartTotal() {
     document.getElementsByClassName('cart__total-amount')[0].innerText = totalAmount;
     document.getElementsByClassName('cart__total-price')[0].innerText = total + ' ₽';
 };
+
 
 function createOrderFunc() {
     const customerModal = document.getElementById("MyModalCustomer");
@@ -348,5 +363,6 @@ function createOrderFunc() {
         );
     }
 };
+
 
 })();
