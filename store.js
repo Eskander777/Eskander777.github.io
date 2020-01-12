@@ -48,6 +48,7 @@ function loadFireBase(database) {
     });
 };
 
+
 function loadGoods(books) {
 
     const loader = document.querySelector(".loader");
@@ -288,6 +289,10 @@ function createOrderFunc(database) {
     const submitBtn = document.getElementById("customer-form");
     submitBtn.addEventListener("submit", submitForm);
     customerModal.style.display = "block";
+    const booksLoad = database.ref().child("books").once("value").then (function(snapshot) {
+        const books = snapshot.val();
+        return books;
+    });
 
       function submitForm(event) {
         event.preventDefault();
@@ -329,7 +334,6 @@ function createOrderFunc(database) {
             "cartTotalPrice": cartTotalPrice,
             "cartTotalAmount": cartTotalAmount,
         };
-        cartOrder.push(cartOrderTotal)
     
         const completeCartOrder = {
             "customerFirstName": customerFirstName,
@@ -341,6 +345,7 @@ function createOrderFunc(database) {
             "inputState": inputState,
             "inputZip": inputZip,
             "cartOrder": cartOrder,
+            "cartOrderTotal": cartOrderTotal,
         };
 
         const customerData = {
@@ -382,10 +387,22 @@ function createOrderFunc(database) {
             }
             );
         };
+        
+        booksLoad.then(function(books){
+            if (completeCartOrder["cartOrder"].length == 0) {
+                alert("Вы не добавили товары в корзину!");
+            } else {
+                for(bookOrder of completeCartOrder["cartOrder"]){
+                    for(book of books) {
+                        if (bookOrder["cartItemName"] == book["title"]){
+                            if (parseInt(book["amount"]) >= parseInt(bookOrder["cartItemAmount"])) {
+                                writeOrderData();
+                                writeCustomerData();
+                            } else {
+                                alert("Недостаточно единиц на складе!")};
 
-        writeOrderData()
-        writeCustomerData()
-    }
+                }}}}})                            
+    };
 };
 
 })();
