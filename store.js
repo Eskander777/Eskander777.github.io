@@ -310,17 +310,20 @@ function createOrderFunc(database) {
         const cartRows = cartItems.getElementsByClassName('cart__row');
         const cartItemNames = cartItems.getElementsByClassName('cart__item-name');
         const cartItemCodes = cartItems.getElementsByClassName('cart__item-code');
+        const cartItemPrices = cartItems.getElementsByClassName('cart__price');
         const cartItemAmounts = cartItems.getElementsByClassName('cart__quantity-input');
         const cartItemTotalPrices = cartItems.getElementsByClassName('cart__item-total-price');
         let cartOrder = [];
         for (let i = 0; i < cartRows.length; i++) {
             const cartItemName = cartItemNames[i].innerText;
             const cartItemCode = cartItemCodes[i].innerText.replace('Артикул: ', '');
+            const cartItemPrice = cartItemPrices[i].innerText.replace(' ₽', '');
             const cartItemAmount = cartItemAmounts[i].value;
             const cartItemTotalPrice = cartItemTotalPrices[i].innerText;
             let cartItem = {
                 "cartItemName": cartItemName,
                 "cartItemCode": cartItemCode,
+                "cartItemPrice": cartItemPrice,
                 "cartItemAmount": cartItemAmount,
                 "cartItemTotalPrice": cartItemTotalPrice,
             };
@@ -349,21 +352,21 @@ function createOrderFunc(database) {
         };
 
         const customerData = {
-            "customerFirstName": completeCartOrder.customerFirstName,
-            "customerLastName": completeCartOrder.customerLastName,
-            "inputEmail4": completeCartOrder.inputEmail4,
-            "inputPassword4": completeCartOrder.inputPassword4,
-            "inputAddress": completeCartOrder.inputAddress,
-            "inputCity": completeCartOrder.inputCity,
-            "inputState": completeCartOrder.inputState,
-            "inputZip": completeCartOrder.inputZip,
+            "customerFirstName": customerFirstName,
+            "customerLastName": customerLastName,
+            "inputEmail4": inputEmail4,
+            "inputPassword4": inputPassword4,
+            "inputAddress": inputAddress,
+            "inputCity": inputCity,
+            "inputState": inputState,
+            "inputZip": inputZip,
         };
         
         console.log(completeCartOrder);
         console.log(customerData);
 
         function writeOrderData() {
-            database.ref('orders/').set({
+            database.ref('orders/').push({
                 completeCartOrder
             }, function (error) {
                 if (error) {
@@ -376,7 +379,7 @@ function createOrderFunc(database) {
         };
 
         function writeCustomerData() {
-            database.ref('customers/').set({
+            database.ref('customers/').push({
                 customerData
             }, function (error) {
                 if (error) {
@@ -395,14 +398,24 @@ function createOrderFunc(database) {
                 for(bookOrder of completeCartOrder["cartOrder"]){
                     for(book of books) {
                         if (bookOrder["cartItemName"] == book["title"]){
-                            if (parseInt(book["amount"]) >= parseInt(bookOrder["cartItemAmount"])) {
-                                writeOrderData();
-                                writeCustomerData();
-                            } else {
-                                alert("Недостаточно единиц на складе!")};
+                            if (parseInt(book["amount"]) <= parseInt(bookOrder["cartItemAmount"])) {
+                                alert("Недостаточно единиц на складе! " + bookOrder["cartItemName"]);
+                                completeCartOrder["cartOrderTotal"]["cartTotalAmount"] = parseInt(completeCartOrder["cartOrderTotal"]["cartTotalAmount"]) - parseInt(bookOrder["cartItemAmount"]);
+                                completeCartOrder["cartOrderTotal"]["cartTotalPrice"] = parseInt(completeCartOrder["cartOrderTotal"]["cartTotalPrice"]) -  parseInt(bookOrder["cartItemTotalPrice"]);
+                                const newAmount = parseInt(prompt("Введите новое количество, не более " + book["amount"]));
+                                bookOrder["cartItemAmount"] = newAmount;
+                                bookOrder["cartItemTotalPrice"] = newAmount * parseInt(bookOrder["cartItemPrice"]);
+                                completeCartOrder["cartOrderTotal"]["cartTotalAmount"] += bookOrder["cartItemAmount"];
+                                completeCartOrder["cartOrderTotal"]["cartTotalPrice"] +=  parseInt(bookOrder["cartItemTotalPrice"]);
 
-                }}}}})                            
-    };
+                            };
+
+                }}}}
+                writeOrderData();
+            })                            
+                
+                writeCustomerData();
+            };
 };
 
 })();
