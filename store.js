@@ -408,12 +408,9 @@ function createOrderFunc(database) {
                                 completeCartOrder["cartOrderTotal"]["cartTotalAmount"] += bookOrder["cartItemAmount"];
                                 completeCartOrder["cartOrderTotal"]["cartTotalPrice"] +=  parseInt(bookOrder["cartItemTotalPrice"]);
 
-                            };
-
-                }}}}
+                            }}}}
                 writeOrderData();
-            })                            
-                
+            }})                            
                 writeCustomerData();
             };
 };
