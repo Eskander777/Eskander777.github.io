@@ -1,1 +1,387 @@
-body{padding:3px}.goods-name{text-align:left}.goods{margin-top:56px;justify-content:left}.row{margin-right:0}.good{border:1px;padding:15px 40px 40px;min-width:auto;max-width:400px}.good:hover{border:1px solid black}.good__image{position:static;margin:20px 30px 0 0;width:200px;height:300px;object-fit:contain;align-self:flex-start}.good__image:hover{opacity:.7}.good__description{margin:2px;margin-right:5px}.good__code{color:grey}.good__actions{margin:20px 30px 0 0;width:150px}.good__price{font:17px PTSansB,Tahoma,sans-serif;position:static;margin-top:10px;margin-bottom:10px}.good__price-val{font-weight:700}.good__amount{padding:3px;width:115px;border-radius:5px;border:1px solid #56CCF2;background-color:#eee;color:#333;padding:0;font-size:1.2em;margin-right:25px}.good__button{margin-top:10px;font-weight:700;font-size:14px;position:static}.cart__header{font-weight:700;font-size:1.1em}.cart__price{width:10%;font-size:1.2em;color:#333}.cart__quantity{width:20%}.cart__image-td{width:10%}.cart__item-image{height:100px;width:auto;margin-bottom:11px;border-radius:5px}.cart__item-code{color:grey}.cart__quantity-input{height:28px;width:50px;border-radius:5px;border:1px solid #56CCF2;background-color:#eee;color:#333;padding:0;font-size:1.2em;margin-right:25px}.cart__item-total{width:10%}.cart__item-total-price{color:#333;font-size:1.1em;margin-top:10px;margin-right:20px}.cart__total{text-align:end}@media only screen and (max-width:600px){.cart__total{text-align:left}}.cart__total-amount{color:#333;font-size:1.1em;margin-top:10px;margin-right:20px}.cart__total-title{font-weight:700;font-size:1.5em;color:black;margin-right:20px}.cart__total-price{color:#333;font-size:1.1em;margin-top:10px;margin-right:20px}.show-cart-button{display:block;margin:40px auto 80px;font-size:1.75em}.register-order-btn{align-content:center}.modal{display:none;position:fixed;z-index:1;padding-top:56px;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,.4)}.modal__content{background-color:#fefefe;margin:auto;padding:20px;border:1px solid #888;width:90%;height:auto}.close{color:#aaa;float:right;font-size:28px;font-weight:700}.close:hover,.close:focus{color:#000;text-decoration:none;cursor:pointer}.modal-for-image{display:none;position:fixed;z-index:1;padding-top:70px;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,.4)}.modal-image__content{margin:auto;display:block;width:80%;max-width:28%;border-radius:3%}#caption{margin:auto;display:block;width:80%;max-width:700px;text-align:center;color:rgb(255,255,255);padding:10px 0;height:150px}.modal-image__content,#caption{animation-name:zoom;animation-duration:0.6s}@keyframes zoom{from{transform:scale(0)}to{transform:scale(1)}}.closeImageModal{position:absolute;top:70px;right:35px;color:#f1f1f1;font-size:40px;font-weight:700;transition:0.3s}.closeImageModal:hover,.closeImageModal:focus{color:#bbb;text-decoration:none;cursor:pointer}@media only screen and (max-width:600px){.modal-image__content{width:90%;max-width:90%}}.modal{display:none;position:fixed;z-index:1;padding-top:56px;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,.4)}.modal__content{background-color:#fefefe;margin:auto;padding:20px;border:1px solid #888;width:90%;height:auto}.close{color:#aaa;float:right;font-size:28px;font-weight:700}.close:hover,.close:focus{color:#000;text-decoration:none;cursor:pointer}.modal-for-customer{display:none;position:fixed;z-index:1;padding-top:70px;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,.4)}.modal-for-customer__content{background-color:#fefefe;margin:auto;padding:20px;border:1px solid #888;width:40%;height:auto}.loader{position:absolute;top:50%;left:50%;width:100px;height:100px;border:16px solid #f3f3f3;border-radius:50%;border-top:16px solid blue;border-bottom:16px solid blue;width:120px;height:120px;-webkit-animation:spin 2s linear infinite;animation:spin 2s linear infinite}.loader.hidden{display:none}@-webkit-keyframes spin{0%{-webkit-transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg)}}@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+body {
+    padding: 3px;
+}
+
+.goods-name {
+    text-align: center;
+}
+
+.goods {
+    margin-top: 56px;
+}
+
+.good {
+    border: 1px solid white;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    min-width: 280px;
+    max-width: 350px
+}
+
+.good:hover {
+    border: 1px solid black;
+}
+
+.good__image-container {
+    text-align: center;
+}
+
+.good__image {
+    width: 200px;
+    height: 200px;
+}
+
+.good__image:hover {
+    opacity: .7
+}
+
+.good__price {
+    font: 17px PTSansB, Tahoma, sans-serif;
+    position: static;
+    padding: 15px 40px 0;
+}
+
+.good__price-val {
+    font-weight: 700
+}
+
+.good__description-container {
+    padding: 15px 40px 30px;
+}
+
+.good__description {
+    margin: 2px;
+    margin-right: 5px
+}
+
+.good__code {
+    color: grey
+}
+
+.good__actions-container {
+    padding: 15px 40px;
+}
+
+.good__actions {
+    width: 150px
+}
+
+.good__amount {
+    padding: 3px;
+    width: 115px;
+    border-radius: 5px;
+    border: 1px solid #56CCF2;
+    background-color: #eee;
+    color: #333;
+    padding: 0;
+    font-size: 1.2em;
+    margin-right: 25px
+}
+
+.good__button {
+    margin-top: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    width: 150%;
+}
+
+.cart__header {
+    font-weight: 700;
+    font-size: 1.1em
+}
+
+.cart__price {
+    width: 10%;
+    font-size: 1.2em;
+    color: #333
+}
+
+.cart__quantity {
+    width: 20%
+}
+
+.cart__image-td {
+    width: 10%
+}
+
+.cart__item-image {
+    height: 100px;
+    width: auto;
+    margin-bottom: 11px;
+    border-radius: 5px
+}
+
+.cart__item-code {
+    color: grey
+}
+
+.cart__quantity-input {
+    height: 28px;
+    width: 50px;
+    border-radius: 5px;
+    border: 1px solid #56CCF2;
+    background-color: #eee;
+    color: #333;
+    padding: 0;
+    font-size: 1.2em;
+    margin-right: 25px
+}
+
+.cart__item-total {
+    width: 10%
+}
+
+.cart__item-total-price {
+    color: #333;
+    font-size: 1.1em;
+    margin-top: 10px;
+    margin-right: 20px
+}
+
+.cart__total {
+    text-align: end
+}
+
+@media only screen and (max-width:600px) {
+    .cart__total {
+        text-align: left
+    }
+}
+
+.cart__total-amount {
+    color: #333;
+    font-size: 1.1em;
+    margin-top: 10px;
+    margin-right: 20px
+}
+
+.cart__total-title {
+    font-weight: 700;
+    font-size: 1.5em;
+    color: black;
+    margin-right: 20px
+}
+
+.cart__total-price {
+    color: #333;
+    font-size: 1.1em;
+    margin-top: 10px;
+    margin-right: 20px
+}
+
+.show-cart-button {
+    display: block;
+    margin: 40px auto 80px;
+    font-size: 1.75em
+}
+
+.register-order-btn {
+    align-content: center
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 56px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, .4)
+}
+
+.modal__content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    height: auto
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: 700
+}
+
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer
+}
+
+.modal-for-image {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 70px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, .4)
+}
+
+.modal-image__content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 28%;
+    border-radius: 3%
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    padding: 10px 0;
+    height: 150px
+}
+
+.modal-image__content, #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+.closeImageModal {
+    position: absolute;
+    top: 70px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: 700;
+    transition: 0.3s
+}
+
+.closeImageModal:hover, .closeImageModal:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer
+}
+
+@media only screen and (max-width:600px) {
+    .modal-image__content {
+        width: 90%;
+        max-width: 90%
+    }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 56px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, .4)
+}
+
+.modal__content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    height: auto
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: 700
+}
+
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer
+}
+
+.modal-for-customer {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 70px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, .4)
+}
+
+.modal-for-customer__content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    height: auto
+}
+
+.customer-cancel-button {
+    margin-left: 10px;
+}
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid blue;
+    border-bottom: 16px solid blue;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite
+}
+
+.loader.hidden {
+    display: none
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg)
+    }
+    100% {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+}

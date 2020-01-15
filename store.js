@@ -54,8 +54,9 @@ function loadGoods(books) {
     const loader = document.querySelector(".loader");
     loader.className += " hidden"
 
+    const templateDiv = document.getElementById("template");
     const itemDiv = document.createElement('div');
-    itemDiv.className = "goods row"
+    itemDiv.className = "goods row no-gutters"
     itemSpan = document.createElement("span");
     itemImg = document.createElement("img");
     itemH3 = document.createElement("h3");
@@ -67,6 +68,7 @@ function loadGoods(books) {
             const good = document.createElement("div");
             good.innerHTML = "";
 
+            const goodImageDiv = document.createElement("div");
             const goodImage = document.createElement("img");
             const goodDivPrice = document.createElement("div");
             goodDivPrice.innerHTML = "";
@@ -74,6 +76,8 @@ function loadGoods(books) {
             const goodSpanVal = document.createElement("span");
             const goodSpanCur = document.createElement("span");
 
+            const goodDescriptionContainerDiv = document.createElement("div");
+            goodDescriptionContainerDiv.className = "good__description-container"
             const goodDivDescription = document.createElement("div");
             goodDivDescription.innerHTML = "";
             const goodDescription = document.createElement("p");
@@ -82,10 +86,14 @@ function loadGoods(books) {
 
             good.className = "good col";
 
+            goodImageDiv.className = "good__image-container";
             goodImage.setAttribute("src", books[i].image);
             goodImage.setAttribute("alt",  books[i].title)
             goodImage.className ="good__image rounded-circle";
+            goodImageDiv.append(goodImage)
 
+            const goodActionsContainerDiv = document.createElement("div");
+            goodActionsContainerDiv.className = "good__actions-container"
             const goodActionsDiv = document.createElement("div");
             goodActionsDiv.innerHTML = "";
             const itemInput = document.createElement("input");
@@ -105,6 +113,7 @@ function loadGoods(books) {
             goodDescription.textContent = books[i].description;
             goodCode.textContent = "Артикул: " + books[i].code;
             goodDivDescription.append(goodTitle, goodDescription, goodCode);
+            goodDescriptionContainerDiv.append(goodDivDescription);
 
             goodActionsDiv.className = "good__actions";
             itemInput.className = "good__amount col-4";
@@ -114,9 +123,10 @@ function loadGoods(books) {
             itemButton.type = "button";
             itemButton.textContent = "Добавить в корзину";
             goodActionsDiv.append(itemInput, itemButton);
+            goodActionsContainerDiv.append(goodActionsDiv);
 
-            good.append(goodImage, goodDivPrice, goodDivDescription, goodActionsDiv, goodActionsDiv);
-            const templateDiv = document.getElementById("template")
+            good.append(goodImageDiv, goodDivPrice, goodActionsContainerDiv, goodDescriptionContainerDiv);
+
             itemDiv.append(good);
             
             templateDiv.append(itemDiv);
@@ -187,7 +197,7 @@ function quantityChanged(event) {
 
 function addToCartClicked(event) {
     const button = event.target;
-    const shopItem = button.parentElement.parentElement;
+    const shopItem = button.parentElement.parentElement.parentElement;
     const title = shopItem.getElementsByClassName('good__description-title')[0].innerText;
     const priceRaw = shopItem.getElementsByClassName('good__price')[0].innerText;
     const amount = shopItem.getElementsByClassName('good__amount')[0].value;
