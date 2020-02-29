@@ -103,7 +103,7 @@ function loadGoods(books) {
             goodSpanVal.className = "good__price-val";
             goodSpanCur.className = "good__price-currency";
             goodSpanVal.textContent = books[i].price;
-            goodSpanCur.textContent = books[i].currency;
+            goodSpanCur.textContent = ' ₽';
             goodDivPrice.append(goodSpanVal, goodSpanCur);
 
             goodDivDescription.className = "good__description";
