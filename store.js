@@ -194,7 +194,6 @@
     const name =
       buttonClicked.parentElement.parentElement.children[1].firstChild
         .innerText;
-    console.log(name);
     const condition = confirm(
       `Вы действительно хотите удалить книгу "${name}" из корзины?`
     );
