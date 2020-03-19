@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css"/>
     <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-database.js"></script>
-    <script type="text/javascript" async src="store.js" ></script>
+    <script type="text/javascript" async src="store.js" defer ></script>
 </head>
 <body>
     <nav class="navbar navbar-light fixed-top bg-light">
@@ -104,7 +104,7 @@
                       <input type="text" class="form-control" id="inputZip" required>
                     </div>
                 <input type="submit" id="submit-button" class="btn btn-outline-success">
-                <a class="btn btn-outline-danger customer-cancel-button" href="/">Отмена</a>
+                <button type="button" class="btn btn-outline-danger customer-cancel-button" id="clsCstmFormBtn">Отмена</button>
               </form> 
             
         </div>
