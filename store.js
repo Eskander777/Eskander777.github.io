@@ -190,11 +190,15 @@
   }
 
   function removeCartItem(event) {
+    const buttonClicked = event.target;
+    const name =
+      buttonClicked.parentElement.parentElement.children[1].firstChild
+        .innerText;
+    console.log(name);
     const condition = confirm(
-      'Вы действительно хотите удалить элемент из корзины?'
+      `Вы действительно хотите удалить книгу "${name}" из корзины?`
     );
     if (condition) {
-      const buttonClicked = event.target;
       buttonClicked.parentElement.parentElement.remove();
       updateCartTotal();
     }
