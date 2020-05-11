@@ -63,7 +63,7 @@
 
     const templateDiv = document.getElementById('template');
     const itemDiv = document.createElement('div');
-    itemDiv.className = 'goods row no-gutters';
+    itemDiv.className = 'goods row';
     itemSpan = document.createElement('span');
     itemImg = document.createElement('img');
     itemH3 = document.createElement('h3');
@@ -95,7 +95,7 @@
       goodImageDiv.className = 'good__image-container';
       goodImage.setAttribute('src', books[i].image);
       goodImage.setAttribute('alt', books[i].title);
-      goodImage.className = 'good__image rounded-circle';
+      goodImage.className = 'good__image';
       goodImageDiv.append(goodImage);
 
       const goodActionsContainerDiv = document.createElement('div');
@@ -122,11 +122,11 @@
       goodDescriptionContainerDiv.append(goodDivDescription);
 
       goodActionsDiv.className = 'good__actions';
-      itemInput.className = 'good__amount col-4';
       itemInput.type = 'number';
+      itemInput.className = 'good__amount col-4';
       itemInput.value = '1';
-      itemButton.className = 'good__button btn btn-primary';
       itemButton.type = 'button';
+      itemButton.className = 'good__button btn btn-primary';
       itemButton.textContent = 'Добавить в корзину';
       goodActionsDiv.append(itemInput, itemButton);
       goodActionsContainerDiv.append(goodActionsDiv);
