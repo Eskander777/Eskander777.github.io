@@ -1,4 +1,4 @@
-(function() {
+(function () {
   if (document.readyState == 'loading') {
     document.addEventListener('DOMContentLoaded', ready);
   } else {
@@ -13,7 +13,7 @@
       projectId: 'book-store-95eba',
       storageBucket: 'book-store-95eba.appspot.com',
       messagingSenderId: '521851003605',
-      appId: '1:521851003605:web:313c060519f784c23cb85c'
+      appId: '1:521851003605:web:313c060519f784c23cb85c',
     };
     firebase.initializeApp(firebaseConfig);
 
@@ -41,7 +41,7 @@
     showCartBtn.addEventListener('click', showCartFunc);
 
     const createOrderBtn = document.getElementById('register-order-btn');
-    createOrderBtn.addEventListener('click', function() {
+    createOrderBtn.addEventListener('click', function () {
       createOrderFunc(database);
     });
   }
@@ -51,7 +51,7 @@
       .ref()
       .child('books')
       .once('value')
-      .then(function(snapshot) {
+      .then(function (snapshot) {
         const books = snapshot.val();
         loadGoods(books);
       });
@@ -167,7 +167,7 @@
     const span = document.getElementsByClassName('close')[0];
     modal.style.display = 'block';
 
-    span.onclick = function() {
+    span.onclick = function () {
       modal.style.display = 'none';
     };
   }
@@ -176,15 +176,13 @@
     const imageModal = document.getElementById('myImageModal');
     const modalImg = document.getElementById('img01');
     const captionText = document.getElementById('caption');
-    const closeImageSpan = document.getElementsByClassName(
-      'closeImageModal'
-    )[0];
+    const closeImageSpan = document.querySelector('#myImageModal > span');
     const img = event.target;
     imageModal.style.display = 'block';
     modalImg.src = img.src;
     captionText.innerHTML = img.alt;
 
-    closeImageSpan.onclick = function() {
+    closeImageSpan.onclick = function () {
       imageModal.style.display = 'none';
     };
   }
@@ -335,7 +333,7 @@
     const submitBtn = document.getElementById('customer-form');
     submitBtn.addEventListener('submit', submitForm);
     const closeCustomerFormBtn = document.getElementById('clsCstmFormBtn');
-    closeCustomerFormBtn.onclick = function() {
+    closeCustomerFormBtn.onclick = function () {
       customerModal.style.display = 'none';
     };
     customerModal.style.display = 'block';
@@ -343,7 +341,7 @@
       .ref()
       .child('books')
       .once('value')
-      .then(function(snapshot) {
+      .then(function (snapshot) {
         const books = snapshot.val();
         return books;
       });
@@ -386,7 +384,7 @@
           cartItemCode: cartItemCode,
           cartItemPrice: cartItemPrice,
           cartItemAmount: cartItemAmount,
-          cartItemTotalPrice: cartItemTotalPrice
+          cartItemTotalPrice: cartItemTotalPrice,
         };
         cartOrder.push(cartItem);
         cartItem = {};
@@ -400,7 +398,7 @@
       )[0].innerText;
       const cartOrderTotal = {
         cartTotalPrice: cartTotalPrice,
-        cartTotalAmount: cartTotalAmount
+        cartTotalAmount: cartTotalAmount,
       };
 
       const completeCartOrder = {
@@ -413,7 +411,7 @@
         inputState: inputState,
         inputZip: inputZip,
         cartOrder: cartOrder,
-        cartOrderTotal: cartOrderTotal
+        cartOrderTotal: cartOrderTotal,
       };
 
       const customerData = {
@@ -424,7 +422,7 @@
         inputAddress: inputAddress,
         inputCity: inputCity,
         inputState: inputState,
-        inputZip: inputZip
+        inputZip: inputZip,
       };
 
       console.log(completeCartOrder);
@@ -433,9 +431,9 @@
       function writeOrderData() {
         database.ref('orders/').push(
           {
-            completeCartOrder
+            completeCartOrder,
           },
-          function(error) {
+          function (error) {
             if (error) {
               alert('Ошибка!');
             } else {
@@ -448,9 +446,9 @@
       function writeCustomerData() {
         database.ref('customers/').push(
           {
-            customerData
+            customerData,
           },
-          function(error) {
+          function (error) {
             if (error) {
               alert('Ошибка!');
             } else {
@@ -460,7 +458,7 @@
         );
       }
 
-      booksLoad.then(function(books) {
+      booksLoad.then(function (books) {
         if (completeCartOrder['cartOrder'].length == 0) {
           alert('Вы не добавили товары в корзину!');
         } else {

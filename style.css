@@ -88,6 +88,7 @@ body {
 
 .cart__item-image {
   width: 80%;
+  min-width: 3rem;
   border-radius: 5px;
 }
 
@@ -96,15 +97,20 @@ body {
 }
 
 .cart__quantity-input {
-  height: 28px;
-  width: 50px;
+  display: block;
+  height: 1.75rem;
+  width: 3rem;
   border-radius: 5px;
   border: 1px solid #56ccf2;
   background-color: #eee;
   color: #333;
   padding: 0;
   font-size: 1.2em;
-  margin-right: 25px;
+  margin-right: 0.5rem;
+}
+
+.cart__item-delete-button {
+  margin-top: 0.5rem;
 }
 
 .cart__price {
@@ -129,6 +135,7 @@ body {
 }
 
 .cart__total {
+  margin-bottom: 1rem;
   text-align: end;
 }
 
@@ -179,7 +186,6 @@ body {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -218,20 +224,6 @@ body {
   color: #000;
   text-decoration: none;
   cursor: pointer;
-}
-
-.modal-for-image {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 70px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-image__content {
@@ -279,27 +271,6 @@ body {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 600px) {
-  .modal-image__content {
-    width: 90%;
-    max-width: 90%;
-  }
-}
-
-.modal-for-customer {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 70px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
 .modal-for-customer__content {
   background-color: #fefefe;
   margin: auto;
@@ -310,7 +281,7 @@ body {
 }
 
 .customer-cancel-button {
-  margin-left: 10px;
+  margin-left: 0.5rem;
 }
 
 .loader {
