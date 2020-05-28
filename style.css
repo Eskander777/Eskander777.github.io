@@ -8,6 +8,7 @@ body {
 }
 
 .good {
+  margin-top: 0.25rem;;
   border: 1px solid white;
   padding: 1.5rem 2.5rem;
   min-width: 17.5rem;
@@ -16,6 +17,7 @@ body {
 
 .good:hover {
   border-color: black;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
 }
 
 .good__image-container {
@@ -47,6 +49,12 @@ body {
   border: 1px solid #56ccf2;
   background-color: #eee;
   font-size: 1.2rem;
+}
+
+.good__amount:focus {
+  background-color: pink;
+  outline: none;
+  border-color: purple;
 }
 
 .good__button {
