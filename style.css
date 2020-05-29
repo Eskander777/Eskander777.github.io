@@ -8,7 +8,7 @@ body {
 }
 
 .good {
-  margin-top: 0.25rem;;
+  margin: 0.25rem 0.25rem 0 0.25rem;;
   border: 1px solid white;
   padding: 1.5rem 2.5rem;
   min-width: 17.5rem;
