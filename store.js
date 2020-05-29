@@ -401,19 +401,6 @@
         cartTotalAmount: cartTotalAmount,
       };
 
-      const completeCartOrder = {
-        customerFirstName: customerFirstName,
-        customerLastName: customerLastName,
-        inputEmail4: inputEmail4,
-        inputPassword4: inputPassword4,
-        inputAddress: inputAddress,
-        inputCity: inputCity,
-        inputState: inputState,
-        inputZip: inputZip,
-        cartOrder: cartOrder,
-        cartOrderTotal: cartOrderTotal,
-      };
-
       const customerData = {
         customerFirstName: customerFirstName,
         customerLastName: customerLastName,
@@ -423,6 +410,25 @@
         inputCity: inputCity,
         inputState: inputState,
         inputZip: inputZip,
+      };
+
+      let date = new Date();
+      const orderDateTime =
+        date.getHours() +
+        ':' +
+        date.getMinutes() +
+        ' ' +
+        date.getDate() +
+        '.' +
+        date.getMonth() +
+        '.' +
+        date.getFullYear();
+
+      const completeCartOrder = {
+        customerData: customerData,
+        orderDateTime: orderDateTime,
+        cartOrder: cartOrder,
+        cartOrderTotal: cartOrderTotal,
       };
 
       console.log(completeCartOrder);
