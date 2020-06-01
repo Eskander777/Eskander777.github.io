@@ -239,6 +239,7 @@ body {
   margin-top: 1.2rem;
   display: block;
   width: 80%;
+  max-width: 28rem;
   border-radius: 3%;
 }
 
