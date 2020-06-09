@@ -21,27 +21,23 @@
 
     loadFireBase(database);
 
-    const removeCartItemButtons = document.getElementsByClassName(
-      'cart__item-delete-button'
+    const removeCartItemButtons = document.querySelectorAll(
+      '.cart__item-delete-button'
     );
-    for (let i = 0; i < removeCartItemButtons.length; i++) {
-      const button = removeCartItemButtons[i];
+    removeCartItemButtons.forEach((button) => {
       button.addEventListener('click', removeCartItem);
-    }
+    });
 
-    const quantityInputs = document.getElementsByClassName(
-      'cart__quantity-input'
-    );
-    for (let i = 0; i < removeCartItemButtons.length; i++) {
-      const input = quantityInputs[i];
+    const quantityInputs = document.querySelectorAll('.cart__quantity-input');
+    quantityInputs.forEach((input) => {
       input.addEventListener('change', quantityChanged);
-    }
+    });
 
     const showCartBtn = document.getElementById('myBtn');
     showCartBtn.addEventListener('click', showCartFunc);
 
     const createOrderBtn = document.getElementById('register-order-btn');
-    createOrderBtn.addEventListener('click', function () {
+    createOrderBtn.addEventListener('click', () => {
       createOrderFunc(database);
     });
   }
@@ -61,23 +57,14 @@
     const loader = document.querySelector('.loader');
     loader.className += ' hidden';
 
-    const templateDiv = document.getElementById('template');
-    const itemDiv = document.createElement('div');
-    itemDiv.className = 'goods row';
-    itemSpan = document.createElement('span');
-    itemImg = document.createElement('img');
-    itemH3 = document.createElement('h3');
-    itemp = document.createElement('p');
-    itemInputField = document.createElement('input');
-    itemButtonField = document.createElement('button');
-    for (i = 0; i < books.length; i++) {
+    const itemDiv = document.getElementById('template');
+
+    books.forEach((book) => {
       const good = document.createElement('div');
-      good.innerHTML = '';
 
       const goodImageDiv = document.createElement('div');
       const goodImage = document.createElement('img');
       const goodDivPrice = document.createElement('div');
-      goodDivPrice.innerHTML = '';
 
       const goodSpanVal = document.createElement('span');
       const goodSpanCur = document.createElement('span');
@@ -85,7 +72,6 @@
       const goodDescriptionContainerDiv = document.createElement('div');
       goodDescriptionContainerDiv.className = 'good__description-container';
       const goodDivDescription = document.createElement('div');
-      goodDivDescription.innerHTML = '';
       const goodDescription = document.createElement('p');
       const goodTitle = document.createElement('h3');
       const goodCode = document.createElement('div');
@@ -93,43 +79,37 @@
       good.className = 'good col';
 
       goodImageDiv.className = 'good__image-container';
-      goodImage.setAttribute('src', books[i].image);
-      goodImage.setAttribute('alt', books[i].title);
-      goodImage.className = 'good__image';
+      goodImage.src = book.image;
+      goodImage.alt = book.title;
       goodImageDiv.append(goodImage);
 
       const goodActionsContainerDiv = document.createElement('div');
       goodActionsContainerDiv.className = 'good__actions-container';
-      const goodActionsDiv = document.createElement('div');
-      goodActionsDiv.innerHTML = '';
       const itemInput = document.createElement('input');
       const itemButton = document.createElement('button');
 
       goodDivPrice.className = 'good__price';
       goodSpanVal.className = 'good__price-val';
-      goodSpanCur.className = 'good__price-currency';
-      goodSpanVal.textContent = books[i].price;
+      goodSpanVal.textContent = book.price;
       goodSpanCur.textContent = ' ₽';
       goodDivPrice.append(goodSpanVal, goodSpanCur);
 
       goodDivDescription.className = 'good__description';
       goodTitle.className = 'good__description-title';
       goodCode.className = 'good__code';
-      goodTitle.textContent = books[i].title;
-      goodDescription.textContent = books[i].description;
-      goodCode.textContent = 'Артикул: ' + books[i].code;
+      goodTitle.textContent = book.title;
+      goodDescription.textContent = book.description;
+      goodCode.textContent = `Артикул: ${book.code}`;
       goodDivDescription.append(goodTitle, goodDescription, goodCode);
       goodDescriptionContainerDiv.append(goodDivDescription);
 
-      goodActionsDiv.className = 'good__actions';
       itemInput.type = 'number';
       itemInput.className = 'good__amount col-4';
       itemInput.value = '1';
       itemButton.type = 'button';
       itemButton.className = 'good__button btn btn-primary';
       itemButton.textContent = 'Добавить в корзину';
-      goodActionsDiv.append(itemInput, itemButton);
-      goodActionsContainerDiv.append(goodActionsDiv);
+      goodActionsContainerDiv.append(itemInput, itemButton);
 
       good.append(
         goodImageDiv,
@@ -139,32 +119,27 @@
       );
 
       itemDiv.append(good);
+    });
 
-      templateDiv.append(itemDiv);
-    }
-
-    const addToCartButtons = document.getElementsByClassName('good__button');
-    for (let i = 0; i < addToCartButtons.length; i++) {
-      const button = addToCartButtons[i];
+    const addToCartButtons = document.querySelectorAll('.good__button');
+    addToCartButtons.forEach((button) => {
       button.addEventListener('click', addToCartClicked);
-    }
+    });
 
-    const quantityToAdd = document.getElementsByClassName('good__amount');
-    for (let i = 0; i < addToCartButtons.length; i++) {
-      const amount = quantityToAdd[i];
+    const quantityToAdd = document.querySelectorAll('.good__amount');
+    quantityToAdd.forEach((amount) => {
       amount.addEventListener('change', quantityChanged);
-    }
+    });
 
-    const imgs = document.getElementsByClassName('good__image');
-    for (let i = 0; i < imgs.length; i++) {
-      const img = imgs[i];
+    const imgs = document.querySelectorAll('.good__image-container img');
+    imgs.forEach((img) => {
       img.addEventListener('click', openGoodImage);
-    }
+    });
   }
 
   function showCartFunc() {
     const modal = document.getElementById('myModal');
-    const span = document.getElementsByClassName('close')[0];
+    const span = document.querySelector('.close');
     modal.style.display = 'block';
 
     span.onclick = function () {
@@ -210,15 +185,13 @@
   }
 
   function addToCartClicked(event) {
-    const button = event.target;
-    const shopItem = button.parentElement.parentElement.parentElement;
-    const title = shopItem.getElementsByClassName('good__description-title')[0]
-      .innerText;
-    const priceRaw = shopItem.getElementsByClassName('good__price')[0]
-      .innerText;
-    const amount = shopItem.getElementsByClassName('good__amount')[0].value;
-    const imageSrc = shopItem.getElementsByClassName('good__image')[0].src;
-    const code = shopItem.getElementsByClassName('good__code')[0].innerText;
+    const shopItem = event.target.parentElement.parentElement;
+    const title = shopItem.querySelector('.good__description-title').innerText;
+    const priceRaw = shopItem.querySelector('.good__price').innerText;
+    const amount = shopItem.querySelector('.good__actions-container > input')
+      .value;
+    const imageSrc = shopItem.querySelector('.good__image-container > img').src;
+    const code = shopItem.querySelector('.good__code').innerText;
     const price = parseFloat(priceRaw.replace('rub', ''));
     const total = price * amount;
     addItemToCart(title, price, amount, imageSrc, code, total);
@@ -231,7 +204,7 @@
 
     const cartItemImg = document.createElement('img');
     cartItemImg.className = 'cart__item-image';
-    cartItemImg.setAttribute('src', imageSrc);
+    cartItemImg.src = imageSrc;
     const cartItemNameCodeTd = document.createElement('td');
     const cartItemNameDiv = document.createElement('div');
     cartItemNameDiv.className = 'cart__item-name';
@@ -251,7 +224,7 @@
     const cartItemQtyDelBtnTd = document.createElement('td');
     cartItemQtyDelBtnTd.className = 'cart__quantity cart__column';
     const cartItemQtyInpInput = document.createElement('input');
-    cartItemQtyInpInput.className = 'cart__quantity-input';
+    cartItemQtyInpInput.className = 'cart__quantity-input good__amount';
     cartItemQtyInpInput.setAttribute('id', 'cart-amount');
     cartItemQtyInpInput.type = 'number';
     cartItemQtyInpInput.value = amount;
@@ -274,7 +247,7 @@
       cartItemTotalPriceTd
     );
 
-    const cartItems = document.getElementsByClassName('cart__items')[0];
+    const cartItems = document.querySelector('.cart__items');
     const cartItemNames = cartItems.getElementsByClassName('cart__item-name');
     const addedAmounts = cartItems.getElementsByClassName(
       'cart__quantity-input'
@@ -293,24 +266,22 @@
     cartItems.append(cartTr);
     alert('Товар успешно добавлен');
     cartTr
-      .getElementsByClassName('cart__item-delete-button')[0]
+      .querySelector('.cart__item-delete-button')
       .addEventListener('click', removeCartItem);
     cartTr
-      .getElementsByClassName('cart__quantity-input')[0]
+      .querySelector('.cart__quantity-input')
       .addEventListener('change', quantityChanged);
   }
 
   function updateCartTotal() {
-    const cartItemContainer = document.getElementsByClassName('cart__items')[0];
+    const cartItemContainer = document.querySelector('.cart__items');
     const cartRows = cartItemContainer.getElementsByClassName('cart__row');
     let total = 0;
     let totalAmount = 0;
     for (let i = 0; i < cartRows.length; i++) {
       const cartTr = cartRows[i];
-      const priceElement = cartTr.getElementsByClassName('cart__price')[0];
-      const quantityElement = cartTr.getElementsByClassName(
-        'cart__quantity-input'
-      )[0];
+      const priceElement = cartTr.querySelector('.cart__price');
+      const quantityElement = cartTr.querySelector('.cart__quantity-input');
       const price = parseFloat(priceElement.innerText);
       const quantity = parseInt(quantityElement.value);
       let totalForItem = 0;
@@ -321,11 +292,8 @@
       totalAmount += quantity;
     }
     total = Math.round(total * 100) / 100;
-    document.getElementsByClassName(
-      'cart__total-amount'
-    )[0].innerText = totalAmount;
-    document.getElementsByClassName('cart__total-price')[0].innerText =
-      total + ' ₽';
+    document.querySelector('.cart__total-amount').innerText = totalAmount;
+    document.querySelector('.cart__total-price').innerText = total + ' ₽';
   }
 
   function createOrderFunc(database) {
@@ -358,7 +326,7 @@
       const inputState = event.target.inputState.value;
       const inputZip = event.target.inputZip.value;
 
-      const cartItems = document.getElementsByClassName('cart__items')[0];
+      const cartItems = document.querySelector('.cart__items');
       const cartRows = cartItems.getElementsByClassName('cart__row');
       const cartItemNames = cartItems.getElementsByClassName('cart__item-name');
       const cartItemCodes = cartItems.getElementsByClassName('cart__item-code');
@@ -390,12 +358,10 @@
         cartItem = {};
       }
 
-      const cartTotalPrice = document.getElementsByClassName(
-        'cart__total-price'
-      )[0].innerText;
-      const cartTotalAmount = document.getElementsByClassName(
-        'cart__total-amount'
-      )[0].innerText;
+      const cartTotalPrice = document.querySelector('.cart__total-price')
+        .innerText;
+      const cartTotalAmount = document.querySelector('.cart__total-amount')
+        .innerText;
       const cartOrderTotal = {
         cartTotalPrice: cartTotalPrice,
         cartTotalAmount: cartTotalAmount,

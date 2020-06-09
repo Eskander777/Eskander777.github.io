@@ -1,3 +1,6 @@
+$transition-rule: 200ms linear;
+$animation-rule: 250ms linear;
+
 .goods {
   margin: auto;
   margin-top: 3.5rem;
@@ -6,7 +9,7 @@
 .good {
   margin: 0.25rem 0.25rem 0 0.25rem;
   border: 1px solid white;
-  transition: border-color 200ms linear, box-shadow 200ms linear;
+  transition: border-color $transition-rule, box-shadow $transition-rule;
   padding: 1.5rem 2.5rem;
   min-width: 17.5rem;
   max-width: 22rem;
@@ -19,15 +22,17 @@
 
 .good__image-container {
   text-align: center;
-}
-.good__image-container img {
-  width: 9.6rem;
-  border-radius: 1rem;
-  opacity: 1;
-  transition: opacity 200ms linear;
-}
-.good__image-container img:hover {
-  opacity: 0.8;
+
+  img {
+    width: 9.6rem;
+    border-radius: 1rem;
+    opacity: 1;
+    transition: opacity $transition-rule;
+  }
+
+  img:hover {
+    opacity: 0.8;
+  }
 }
 
 .good__actions-container {
@@ -138,6 +143,7 @@
     text-align: left;
   }
 }
+
 .cart__total-amount {
   color: #333;
   font-size: 1.1em;
@@ -192,7 +198,7 @@
 }
 
 .modal__content {
-  animation: slide 250ms linear;
+  animation: slide $animation-rule;
 }
 
 @keyframes slide {
@@ -203,6 +209,7 @@
     transform: translateY(0);
   }
 }
+
 .close {
   color: #aaa;
   float: right;
@@ -228,12 +235,12 @@
 
 #caption {
   text-align: center;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .modal-image__content,
 #caption {
-  animation: zoom 250ms linear;
+  animation: zoom $animation-rule;
 }
 
 @keyframes zoom {
@@ -244,6 +251,7 @@
     transform: scale(1);
   }
 }
+
 .closeImageModal {
   position: absolute;
   top: 70px;
@@ -302,6 +310,7 @@
     -webkit-transform: rotate(360deg);
   }
 }
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -310,5 +319,3 @@
     transform: rotate(360deg);
   }
 }
-
-/*# sourceMappingURL=style.css.map */
