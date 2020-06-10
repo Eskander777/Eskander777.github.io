@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="style.css"/>
     <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-database.js"></script>
-    <script type="text/javascript" async src="store.js" defer ></script>
+    <script type="text/javascript" async src="store.js" async ></script>
 </head>
 <body>
     <nav class="navbar navbar-light fixed-top bg-light">
         <a class="navbar-brand">Книги</a>
-        <button class="show-cart btn btn-secondary my-2 my-sm-0" id="myBtn">Показать корзину</button>
+        <button class="btn btn-secondary my-2 my-sm-0" id="myBtn">Показать корзину</button>
     </nav>
     
     <main>
@@ -22,8 +22,7 @@
         <div id="template" class="goods row">
         </div>
         <div id="myImageModal" class="modal">
-          <span class="closeImageModal">&times;</span>
-          <img class="modal-image__content" id="img01">
+          <img class="modal-image__content" id="img01"/>
           <div id="caption"></div>
         </div>
     </main>
@@ -46,12 +45,15 @@
             </tbody>
             </table>
             <div>
-            <div class="cart__total">
-                <div class="cart__total-title">Общее кол-во</div>
-                <span class="cart__total-amount">0</span>
-                <div class="cart__total-title">Общая стоимость</div>
-                <span class="cart__total-price">0 ₽</span>
-            </div>
+              <div class="cart__total-container">
+                <div class="cart__total">
+                    <div class="cart__total-title">Общее кол-во</div>
+                    <span class="cart__total-amount">0</span>
+                    <div class="cart__total-title">Общая стоимость</div>
+                    <span class="cart__total-price">0</span>
+                    <span>₽</span>
+                </div>
+              </div>
             <div class="col text-center">
                 <button class="btn btn-success" id="register-order-btn">Сформировать заказ</button>
             </div>

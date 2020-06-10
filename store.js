@@ -55,7 +55,7 @@
 
   function loadGoods(books) {
     const loader = document.querySelector('.loader');
-    loader.className += ' hidden';
+    loader.style.display = 'none';
 
     const itemDiv = document.getElementById('template');
 
@@ -151,13 +151,12 @@
     const imageModal = document.getElementById('myImageModal');
     const modalImg = document.getElementById('img01');
     const captionText = document.getElementById('caption');
-    const closeImageSpan = document.querySelector('#myImageModal > span');
     const img = event.target;
     imageModal.style.display = 'block';
     modalImg.src = img.src;
     captionText.innerHTML = img.alt;
 
-    closeImageSpan.onclick = function () {
+    imageModal.onclick = function () {
       imageModal.style.display = 'none';
     };
   }
@@ -224,7 +223,7 @@
     const cartItemQtyDelBtnTd = document.createElement('td');
     cartItemQtyDelBtnTd.className = 'cart__quantity cart__column';
     const cartItemQtyInpInput = document.createElement('input');
-    cartItemQtyInpInput.className = 'cart__quantity-input good__amount';
+    cartItemQtyInpInput.className = 'cart__quantity-input';
     cartItemQtyInpInput.setAttribute('id', 'cart-amount');
     cartItemQtyInpInput.type = 'number';
     cartItemQtyInpInput.value = amount;
@@ -293,7 +292,7 @@
     }
     total = Math.round(total * 100) / 100;
     document.querySelector('.cart__total-amount').innerText = totalAmount;
-    document.querySelector('.cart__total-price').innerText = total + ' ₽';
+    document.querySelector('.cart__total-price').innerText = total;
   }
 
   function createOrderFunc(database) {

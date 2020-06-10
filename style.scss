@@ -1,9 +1,30 @@
 $transition-rule: 200ms linear;
 $animation-rule: 250ms linear;
 
+@mixin media-max-width($width) {
+  @media (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin display-flex() {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.fixed-top {
+  z-index: 50;
+}
+
 .goods {
   margin: auto;
   margin-top: 3.5rem;
+
+  @include media-max-width(37rem) {
+    margin-top: 4.5rem;
+  }
 }
 
 .good {
@@ -13,11 +34,11 @@ $animation-rule: 250ms linear;
   padding: 1.5rem 2.5rem;
   min-width: 17.5rem;
   max-width: 22rem;
-}
 
-.good:hover {
-  border-color: black;
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
+  &:hover {
+    border-color: black;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
+  }
 }
 
 .good__image-container {
@@ -28,10 +49,10 @@ $animation-rule: 250ms linear;
     border-radius: 1rem;
     opacity: 1;
     transition: opacity $transition-rule;
-  }
 
-  img:hover {
-    opacity: 0.8;
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }
 
@@ -46,12 +67,12 @@ $animation-rule: 250ms linear;
   border: 1px solid #56ccf2;
   background-color: #eee;
   font-size: 1.2rem;
-}
 
-.good__amount:focus {
-  background-color: pink;
-  outline: none;
-  border-color: purple;
+  &:focus {
+    background-color: pink;
+    outline: none;
+    border-color: purple;
+  }
 }
 
 .good__button {
@@ -101,11 +122,11 @@ $animation-rule: 250ms linear;
 }
 
 .cart__quantity-input {
+  @extend .good__amount;
   display: block;
   height: 1.75rem;
-  width: 3rem;
-  padding: 0;
-  margin-right: 0.5rem;
+  width: 4.7rem;
+  padding: 0.1rem;
 }
 
 .cart__item-delete-button {
@@ -133,64 +154,66 @@ $animation-rule: 250ms linear;
   margin-right: 20px;
 }
 
-.cart__total {
+.cart__total-container {
   margin-bottom: 1rem;
-  text-align: end;
+  margin-right: 1rem;
+  @include display-flex();
+  justify-content: flex-end;
+
+  @include media-max-width(37rem) {
+    justify-content: flex-start;
+  }
 }
 
-@media only screen and (max-width: 600px) {
-  .cart__total {
-    text-align: left;
+.cart__total {
+  width: 15rem;
+  text-align: right;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+
+  @include media-max-width(37rem) {
+    & {
+      text-align: left;
+    }
   }
 }
 
 .cart__total-amount {
   color: #333;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   margin-top: 10px;
-  margin-right: 20px;
 }
 
 .cart__total-title {
   font-weight: 700;
   font-size: 1.5em;
   color: black;
-  margin-right: 20px;
 }
 
 .cart__total-price {
+  @extend .good__price-val;
   color: #333;
   font-size: 1.1em;
   margin-top: 10px;
-  margin-right: 20px;
-}
-
-.show-cart-button {
-  display: block;
-  margin: 40px auto 80px;
-  font-size: 1.75em;
-}
-
-.register-order-btn {
-  align-content: center;
 }
 
 .modal {
   display: none;
   position: fixed;
   z-index: 1;
-  padding-top: 56px;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
+  z-index: 51;
 }
 
 .modal__content {
   background-color: #fefefe;
   margin: auto;
+  margin-top: 2.5rem;
   padding: 20px;
   border: 1px solid #888;
   width: 90%;
@@ -212,7 +235,6 @@ $animation-rule: 250ms linear;
 
 .close {
   color: #aaa;
-  float: right;
   font-size: 28px;
   font-weight: 700;
 }
@@ -226,9 +248,9 @@ $animation-rule: 250ms linear;
 
 .modal-image__content {
   margin: auto;
-  margin-top: 1.2rem;
+  margin-top: 2.5rem;
   display: block;
-  width: 80%;
+  width: 90%;
   max-width: 28rem;
   border-radius: 3%;
 }
@@ -252,23 +274,6 @@ $animation-rule: 250ms linear;
   }
 }
 
-.closeImageModal {
-  position: absolute;
-  top: 70px;
-  right: 35px;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: 700;
-  transition: 0.3s;
-}
-
-.closeImageModal:hover,
-.closeImageModal:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
-}
-
 .modal-for-customer__content {
   background-color: #fefefe;
   margin: auto;
@@ -284,38 +289,38 @@ $animation-rule: 250ms linear;
 
 .loader {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100px;
-  height: 100px;
+  top: 43%;
+  left: 47%;
   border: 16px solid #f3f3f3;
   border-radius: 50%;
   border-top: 16px solid blue;
   border-bottom: 16px solid blue;
-  width: 120px;
-  height: 120px;
+  width: 10rem;
+  height: 10rem;
+  z-index: 10;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
-}
 
-.hidden {
-  display: none;
+  @include media-max-width(59rem) {
+    left: 30%;
+    top: 40%;
+  }
 }
 
 @-webkit-keyframes spin {
-  0% {
+  from {
     -webkit-transform: rotate(0deg);
   }
-  100% {
+  to {
     -webkit-transform: rotate(360deg);
   }
 }
 
 @keyframes spin {
-  0% {
+  from {
     transform: rotate(0deg);
   }
-  100% {
+  to {
     transform: rotate(360deg);
   }
 }
