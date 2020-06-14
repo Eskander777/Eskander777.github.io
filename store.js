@@ -106,7 +106,6 @@
       itemInput.type = 'number';
       itemInput.className = 'good__amount col-4';
       itemInput.value = '1';
-      itemButton.type = 'button';
       itemButton.className = 'good__button btn btn-primary';
       itemButton.textContent = 'Добавить в корзину';
       goodActionsContainerDiv.append(itemInput, itemButton);
@@ -316,36 +315,34 @@
     function submitForm(event) {
       event.preventDefault();
 
-      const customerFirstName = event.target.customerFirstName.value;
-      const customerLastName = event.target.customerLastName.value;
-      const inputEmail4 = event.target.inputEmail4.value;
-      const inputPassword4 = event.target.inputPassword4.value;
-      const inputAddress = event.target.inputAddress.value;
-      const inputCity = event.target.inputCity.value;
-      const inputState = event.target.inputState.value;
-      const inputZip = event.target.inputZip.value;
+      const rawDate = new Date();
+      const strDate = rawDate.toString();
+      const date = strDate.replace(' GMT+0300 (Москва, стандартное время)', '');
 
-      const cartItems = document.querySelector('.cart__items');
-      const cartRows = cartItems.getElementsByClassName('cart__row');
-      const cartItemNames = cartItems.getElementsByClassName('cart__item-name');
-      const cartItemCodes = cartItems.getElementsByClassName('cart__item-code');
-      const cartItemPrices = cartItems.getElementsByClassName('cart__price');
-      const cartItemAmounts = cartItems.getElementsByClassName(
-        'cart__quantity-input'
-      );
-      const cartItemTotalPrices = cartItems.getElementsByClassName(
-        'cart__item-total-price'
-      );
+      userData = event.target;
+
+      const customerFirstName = userData.customerFirstName.value;
+      const customerLastName = userData.customerLastName.value;
+      const inputEmail4 = userData.inputEmail4.value;
+      const inputPassword4 = userData.inputPassword4.value;
+      const inputAddress = userData.inputAddress.value;
+      const inputCity = userData.inputCity.value;
+      const inputState = userData.inputState.value;
+      const inputZip = userData.inputZip.value;
+
+      const cartRows = document.querySelectorAll('.cart__items > .cart__row');
+
       let cartOrder = [];
-      for (let i = 0; i < cartRows.length; i++) {
-        const cartItemName = cartItemNames[i].innerText;
-        const cartItemCode = cartItemCodes[i].innerText.replace(
+
+      cartRows.forEach((row) => {
+        const cartItemName = row.children[1].children[0].textContent;
+        const cartItemCode = row.children[1].children[1].textContent.replace(
           'Артикул: ',
           ''
         );
-        const cartItemPrice = cartItemPrices[i].innerText.replace(' ₽', '');
-        const cartItemAmount = cartItemAmounts[i].value;
-        const cartItemTotalPrice = cartItemTotalPrices[i].innerText;
+        const cartItemPrice = row.children[2].textContent.replace(' ₽', '');
+        const cartItemAmount = row.children[3].children[0].value;
+        const cartItemTotalPrice = row.children[4].textContent;
         let cartItem = {
           cartItemName: cartItemName,
           cartItemCode: cartItemCode,
@@ -355,7 +352,7 @@
         };
         cartOrder.push(cartItem);
         cartItem = {};
-      }
+      });
 
       const cartTotalPrice = document.querySelector('.cart__total-price')
         .innerText;
@@ -377,21 +374,9 @@
         inputZip: inputZip,
       };
 
-      let date = new Date();
-      const orderDateTime =
-        date.getHours() +
-        ':' +
-        date.getMinutes() +
-        ' ' +
-        date.getDate() +
-        '.' +
-        date.getMonth() +
-        '.' +
-        date.getFullYear();
-
       const completeCartOrder = {
         customerData: customerData,
-        orderDateTime: orderDateTime,
+        orderDateTime: date,
         cartOrder: cartOrder,
         cartOrderTotal: cartOrderTotal,
       };
